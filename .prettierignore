@@ -1,0 +1,6 @@
+# Ignore artifacts:
+build
+coverage
+.husky
+# Prettier will follow rules specified in .gitignoreif it exists in the same directory from which it is run.
+# https://prettier.io/docs/en/install
