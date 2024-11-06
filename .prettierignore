@@ -2,5 +2,15 @@
 build
 coverage
 .husky
+strapi
 # Prettier will follow rules specified in .gitignoreif it exists in the same directory from which it is run.
 # https://prettier.io/docs/en/install
+
+
+**/*.gif
+**/*.woff2
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.svg
+**/*.txt

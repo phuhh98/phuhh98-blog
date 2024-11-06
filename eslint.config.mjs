@@ -26,25 +26,13 @@ export default tseslint.config(
   reactPlugin.configs.flat["jsx-runtime"],
   {
     ...mdx.flat,
-    // optional, if you want to lint code blocks at the same
-    processor: mdx.createRemarkProcessor({
-      // optional, if you want to disable language mapper, set it to `false`
-      // if you want to override the default language mapper inside, you can provide your own
-      languageMapper: {},
-      lintCodeBlocks: true,
-    }),
-  },
-  {
-    files: ["**/*.md", "**/*.mdx"],
-    rules: {
-      "no-irregular-whitespace": ["off"],
-    },
-  },
-  {
-    files: ["**/*.mdx"],
-    rules: {
-      "@typescript-eslint/no-unused-vars": ["off"],
-    },
+    // // optional, if you want to lint code blocks at the same
+    // processor: mdx.createRemarkProcessor({
+    //   // optional, if you want to disable language mapper, set it to `false`
+    //   // if you want to override the default language mapper inside, you can provide your own
+    //   languageMapper: {},
+    //   lintCodeBlocks: true,
+    // }),
   },
   {
     rules: {
@@ -52,7 +40,19 @@ export default tseslint.config(
       "no-console": ["error"],
     },
   },
+  {
+    files: ["**/*.md", "**/*.mdx"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": ["off"],
+      "no-console": ["off"],
+      "no-irregular-whitespace": ["off"],
+      "no-undef": ["warn"],
+    },
+  },
   includeIgnoreFile(gitignorePath),
+  {
+    ignores: ["strapi/"],
+  },
   // Ref https://github.com/prettier/eslint-config-prettier?tab=readme-ov-file#installation
   eslintConfigPrettier,
 );

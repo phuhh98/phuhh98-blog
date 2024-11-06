@@ -1,59 +1,119 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
-import "../styles/global.scss";
+import { siteConfig } from "@/site-config";
 
-interface Props {
-  description: string;
-  image?: string;
+import "../styles/global.css";
+
+import { ViewTransitions } from "astro:transitions";
+
+export interface Props {
+  articleDate?: string | undefined;
+  description?: string;
+  ogImage?: string | undefined;
   title: string;
 }
 
+const { articleDate, description = siteConfig.description, ogImage, title } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(ogImage ? ogImage : "/open-graph.png", Astro.url).href;
 
-const { description, image = `${import.meta.env.BASE_URL}/blog-placeholder-1.jpg`, title } = Astro.props;
+const titleSeparator = "•";
+
+const siteTitle = `${title} ${titleSeparator} ${siteConfig.title}`;
+
+import { AstroFont } from "astro-font";
+import { join } from "path";
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta content="width=device-width,initial-scale=1" name="viewport" />
-<link href={`${import.meta.env.BASE_URL}/favicon.svg`} rel="icon" type="image/svg+xml" />
+<link href="/favicon.svg" rel="icon" type="image/svg+xml" />
 <meta content={Astro.generator} name="generator" />
-
-<!-- Font preloads -->
-<link
-  as="font"
-  crossorigin
-  href={`${import.meta.env.BASE_URL}/fonts/atkinson-regular.woff`}
-  rel="preload"
-  type="font/woff"
-/>
-<link
-  as="font"
-  crossorigin
-  href={`${import.meta.env.BASE_URL}/fonts/atkinson-bold.woff`}
-  rel="preload"
-  type="font/woff"
-/>
 
 <!-- Canonical URL -->
 <link href={canonicalURL} rel="canonical" />
 
 <!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta content={title} name="title" />
+<title>{siteTitle}</title>
+
+<!-- ViewTransitions  -->
+<ViewTransitions />
+
+<!-- SEO -->
+<meta content={siteTitle} name="title" />
 <meta content={description} name="description" />
+<meta content={siteConfig.author} name="author" />
 
 <!-- Open Graph / Facebook -->
-<meta content="website" property="og:type" />
+<meta content={articleDate ? "article" : "website"} property="og:type" />
 <meta content={Astro.url} property="og:url" />
 <meta content={title} property="og:title" />
 <meta content={description} property="og:description" />
-<meta content={new URL(image, Astro.url)} property="og:image" />
+<meta content={socialImageURL} property="og:image" />
+{
+  articleDate && (
+    <>
+      <meta content={siteConfig.author} property="article:author" />
+      <meta content={articleDate} property="article:published_time" />
+    </>
+  )
+}
 
 <!-- Twitter -->
 <meta content="summary_large_image" property="twitter:card" />
 <meta content={Astro.url} property="twitter:url" />
 <meta content={title} property="twitter:title" />
 <meta content={description} property="twitter:description" />
-<meta content={new URL(image, Astro.url)} property="twitter:image" />
+<meta content={socialImageURL} property="twitter:image" />
+
+<!-- RSS auto-discovery -->
+<link href="/rss.xml" rel="alternate" title={siteConfig.title} type="application/rss+xml" />
+
+<AstroFont
+  config={[
+    {
+      display: "swap",
+      fallback: "sans-serif",
+      name: "Manrope",
+      preload: false,
+      src: [
+        {
+          path: join(process.cwd(), "public", "fonts", "Manrope-ExtraLight.woff2"),
+          style: "normal",
+          weight: "200",
+        },
+        {
+          path: join(process.cwd(), "public", "fonts", "Manrope-Light.woff2"),
+          style: "normal",
+          weight: "300",
+        },
+        {
+          path: join(process.cwd(), "public", "fonts", "Manrope-Regular.woff2"),
+          style: "normal",
+          weight: "400",
+        },
+        {
+          path: join(process.cwd(), "public", "fonts", "Manrope-Medium.woff2"),
+          style: "normal",
+          weight: "500",
+        },
+        {
+          path: join(process.cwd(), "public", "fonts", "Manrope-SemiBold.woff2"),
+          style: "normal",
+          weight: "600",
+        },
+        {
+          path: join(process.cwd(), "public", "fonts", "Manrope-Bold.woff2"),
+          preload: true,
+          style: "normal",
+          weight: "700",
+        },
+        {
+          path: join(process.cwd(), "public", "fonts", "Manrope-ExtraBold.woff2"),
+          style: "normal",
+          weight: "800",
+        },
+      ],
+    },
+  ]}
+/>
