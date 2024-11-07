@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_button_ctas",
+  "info": {
+    "displayName": "cta",
+    "icon": "cursor"
+  },
+  "options": {},
+  "attributes": {
+    "buttonTitle": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
