@@ -51,7 +51,7 @@ export default tseslint.config(
   },
   includeIgnoreFile(gitignorePath),
   {
-    ignores: ["strapi/"],
+    ignores: ["strapi/", "src/codegen/"],
   },
   // Ref https://github.com/prettier/eslint-config-prettier?tab=readme-ov-file#installation
   eslintConfigPrettier,

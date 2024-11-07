@@ -1,0 +1,902 @@
+input BooleanFilterInput {
+  and: [Boolean]
+  between: [Boolean]
+  contains: Boolean
+  containsi: Boolean
+  endsWith: Boolean
+  eq: Boolean
+  eqi: Boolean
+  gt: Boolean
+  gte: Boolean
+  in: [Boolean]
+  lt: Boolean
+  lte: Boolean
+  ne: Boolean
+  nei: Boolean
+  not: BooleanFilterInput
+  notContains: Boolean
+  notContainsi: Boolean
+  notIn: [Boolean]
+  notNull: Boolean
+  null: Boolean
+  or: [Boolean]
+  startsWith: Boolean
+}
+
+type ComponentButtonCta {
+  buttonTitle: String!
+  id: ID!
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+input DateTimeFilterInput {
+  and: [DateTime]
+  between: [DateTime]
+  contains: DateTime
+  containsi: DateTime
+  endsWith: DateTime
+  eq: DateTime
+  eqi: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  ne: DateTime
+  nei: DateTime
+  not: DateTimeFilterInput
+  notContains: DateTime
+  notContainsi: DateTime
+  notIn: [DateTime]
+  notNull: Boolean
+  null: Boolean
+  or: [DateTime]
+  startsWith: DateTime
+}
+
+type DeleteMutationResponse {
+  documentId: ID!
+}
+
+enum ENUM_POST_CATEGORY {
+  category_1
+  category_2
+  category_3
+  category_4
+}
+
+type Error {
+  code: String!
+  message: String
+}
+
+input FileInfoInput {
+  alternativeText: String
+  caption: String
+  name: String
+}
+
+input FloatFilterInput {
+  and: [Float]
+  between: [Float]
+  contains: Float
+  containsi: Float
+  endsWith: Float
+  eq: Float
+  eqi: Float
+  gt: Float
+  gte: Float
+  in: [Float]
+  lt: Float
+  lte: Float
+  ne: Float
+  nei: Float
+  not: FloatFilterInput
+  notContains: Float
+  notContainsi: Float
+  notIn: [Float]
+  notNull: Boolean
+  null: Boolean
+  or: [Float]
+  startsWith: Float
+}
+
+union GenericMorph =
+  | ComponentButtonCta
+  | I18NLocale
+  | Post
+  | ReviewWorkflowsWorkflow
+  | ReviewWorkflowsWorkflowStage
+  | UploadFile
+  | UsersPermissionsPermission
+  | UsersPermissionsRole
+  | UsersPermissionsUser
+
+type I18NLocale {
+  code: String
+  createdAt: DateTime
+  documentId: ID!
+  name: String
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""
+A string used to identify an i18n locale
+"""
+scalar I18NLocaleCode
+
+type I18NLocaleEntityResponseCollection {
+  nodes: [I18NLocale!]!
+  pageInfo: Pagination!
+}
+
+input I18NLocaleFiltersInput {
+  and: [I18NLocaleFiltersInput]
+  code: StringFilterInput
+  createdAt: DateTimeFilterInput
+  documentId: IDFilterInput
+  locale: StringFilterInput
+  localizations: I18NLocaleFiltersInput
+  name: StringFilterInput
+  not: I18NLocaleFiltersInput
+  or: [I18NLocaleFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+input IDFilterInput {
+  and: [ID]
+  between: [ID]
+  contains: ID
+  containsi: ID
+  endsWith: ID
+  eq: ID
+  eqi: ID
+  gt: ID
+  gte: ID
+  in: [ID]
+  lt: ID
+  lte: ID
+  ne: ID
+  nei: ID
+  not: IDFilterInput
+  notContains: ID
+  notContainsi: ID
+  notIn: [ID]
+  notNull: Boolean
+  null: Boolean
+  or: [ID]
+  startsWith: ID
+}
+
+input IntFilterInput {
+  and: [Int]
+  between: [Int]
+  contains: Int
+  containsi: Int
+  endsWith: Int
+  eq: Int
+  eqi: Int
+  gt: Int
+  gte: Int
+  in: [Int]
+  lt: Int
+  lte: Int
+  ne: Int
+  nei: Int
+  not: IntFilterInput
+  notContains: Int
+  notContainsi: Int
+  notIn: [Int]
+  notNull: Boolean
+  null: Boolean
+  or: [Int]
+  startsWith: Int
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+input JSONFilterInput {
+  and: [JSON]
+  between: [JSON]
+  contains: JSON
+  containsi: JSON
+  endsWith: JSON
+  eq: JSON
+  eqi: JSON
+  gt: JSON
+  gte: JSON
+  in: [JSON]
+  lt: JSON
+  lte: JSON
+  ne: JSON
+  nei: JSON
+  not: JSONFilterInput
+  notContains: JSON
+  notContainsi: JSON
+  notIn: [JSON]
+  notNull: Boolean
+  null: Boolean
+  or: [JSON]
+  startsWith: JSON
+}
+
+type Mutation {
+  """
+  Change user password. Confirm with the current password.
+  """
+  changePassword(
+    currentPassword: String!
+    password: String!
+    passwordConfirmation: String!
+  ): UsersPermissionsLoginPayload
+  createPost(
+    data: PostInput!
+
+    """
+    The locale to use for the query
+    """
+    locale: I18NLocaleCode
+    status: PublicationStatus = PUBLISHED
+  ): Post
+  createReviewWorkflowsWorkflow(
+    data: ReviewWorkflowsWorkflowInput!
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflow
+  createReviewWorkflowsWorkflowStage(
+    data: ReviewWorkflowsWorkflowStageInput!
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflowStage
+
+  """
+  Create a new role
+  """
+  createUsersPermissionsRole(data: UsersPermissionsRoleInput!): UsersPermissionsCreateRolePayload
+
+  """
+  Create a new user
+  """
+  createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+  deletePost(
+    documentId: ID!
+
+    """
+    The locale to use for the query
+    """
+    locale: I18NLocaleCode
+  ): DeleteMutationResponse
+  deleteReviewWorkflowsWorkflow(documentId: ID!): DeleteMutationResponse
+  deleteReviewWorkflowsWorkflowStage(documentId: ID!): DeleteMutationResponse
+  deleteUploadFile(id: ID!): UploadFile
+
+  """
+  Delete an existing role
+  """
+  deleteUsersPermissionsRole(id: ID!): UsersPermissionsDeleteRolePayload
+
+  """
+  Delete an existing user
+  """
+  deleteUsersPermissionsUser(id: ID!): UsersPermissionsUserEntityResponse!
+
+  """
+  Confirm an email users email address
+  """
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+
+  """
+  Request a reset password token
+  """
+  forgotPassword(email: String!): UsersPermissionsPasswordPayload
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+
+  """
+  Register a user
+  """
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+
+  """
+  Reset user password. Confirm with a code (resetToken from forgotPassword)
+  """
+  resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+  updatePost(
+    data: PostInput!
+    documentId: ID!
+
+    """
+    The locale to use for the query
+    """
+    locale: I18NLocaleCode
+    status: PublicationStatus = PUBLISHED
+  ): Post
+  updateReviewWorkflowsWorkflow(
+    data: ReviewWorkflowsWorkflowInput!
+    documentId: ID!
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflow
+  updateReviewWorkflowsWorkflowStage(
+    data: ReviewWorkflowsWorkflowStageInput!
+    documentId: ID!
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflowStage
+  updateUploadFile(id: ID!, info: FileInfoInput): UploadFile!
+
+  """
+  Update an existing role
+  """
+  updateUsersPermissionsRole(data: UsersPermissionsRoleInput!, id: ID!): UsersPermissionsUpdateRolePayload
+
+  """
+  Update an existing user
+  """
+  updateUsersPermissionsUser(data: UsersPermissionsUserInput!, id: ID!): UsersPermissionsUserEntityResponse!
+}
+
+type Pagination {
+  page: Int!
+  pageCount: Int!
+  pageSize: Int!
+  total: Int!
+}
+
+input PaginationArg {
+  limit: Int
+  page: Int
+  pageSize: Int
+  start: Int
+}
+
+type Post {
+  category: ENUM_POST_CATEGORY!
+  content: String!
+  createdAt: DateTime
+  description: String!
+  documentId: ID!
+  footer: [PostFooterDynamicZone]
+  heroImage: UploadFile
+  locale: String
+  localizations(filters: PostFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): [Post]!
+  localizations_connection(
+    filters: PostFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): PostRelationResponseCollection
+  publishedAt: DateTime
+  slug: String
+  title: String!
+  updatedAt: DateTime
+}
+
+type PostEntityResponseCollection {
+  nodes: [Post!]!
+  pageInfo: Pagination!
+}
+
+input PostFiltersInput {
+  and: [PostFiltersInput]
+  category: StringFilterInput
+  content: StringFilterInput
+  createdAt: DateTimeFilterInput
+  description: StringFilterInput
+  documentId: IDFilterInput
+  locale: StringFilterInput
+  localizations: PostFiltersInput
+  not: PostFiltersInput
+  or: [PostFiltersInput]
+  publishedAt: DateTimeFilterInput
+  slug: StringFilterInput
+  title: StringFilterInput
+  updatedAt: DateTimeFilterInput
+}
+
+union PostFooterDynamicZone = ComponentButtonCta | Error
+
+scalar PostFooterDynamicZoneInput
+
+input PostInput {
+  category: ENUM_POST_CATEGORY
+  content: String
+  description: String
+  footer: [PostFooterDynamicZoneInput!]
+  heroImage: ID
+  publishedAt: DateTime
+  slug: String
+  title: String
+}
+
+type PostRelationResponseCollection {
+  nodes: [Post!]!
+}
+
+enum PublicationStatus {
+  DRAFT
+  PUBLISHED
+}
+
+type Query {
+  i18NLocale(documentId: ID!, status: PublicationStatus = PUBLISHED): I18NLocale
+  i18NLocales(
+    filters: I18NLocaleFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [I18NLocale]!
+  i18NLocales_connection(
+    filters: I18NLocaleFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): I18NLocaleEntityResponseCollection
+  me: UsersPermissionsMe
+  post(
+    documentId: ID!
+
+    """
+    The locale to use for the query
+    """
+    locale: I18NLocaleCode
+    status: PublicationStatus = PUBLISHED
+  ): Post
+  posts(
+    filters: PostFiltersInput
+
+    """
+    The locale to use for the query
+    """
+    locale: I18NLocaleCode
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [Post]!
+  posts_connection(
+    filters: PostFiltersInput
+
+    """
+    The locale to use for the query
+    """
+    locale: I18NLocaleCode
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): PostEntityResponseCollection
+  reviewWorkflowsWorkflow(documentId: ID!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflow
+  reviewWorkflowsWorkflowStage(documentId: ID!, status: PublicationStatus = PUBLISHED): ReviewWorkflowsWorkflowStage
+  reviewWorkflowsWorkflowStages(
+    filters: ReviewWorkflowsWorkflowStageFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [ReviewWorkflowsWorkflowStage]!
+  reviewWorkflowsWorkflowStages_connection(
+    filters: ReviewWorkflowsWorkflowStageFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflowStageEntityResponseCollection
+  reviewWorkflowsWorkflows(
+    filters: ReviewWorkflowsWorkflowFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [ReviewWorkflowsWorkflow]!
+  reviewWorkflowsWorkflows_connection(
+    filters: ReviewWorkflowsWorkflowFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): ReviewWorkflowsWorkflowEntityResponseCollection
+  uploadFile(documentId: ID!, status: PublicationStatus = PUBLISHED): UploadFile
+  uploadFiles(
+    filters: UploadFileFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [UploadFile]!
+  uploadFiles_connection(
+    filters: UploadFileFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): UploadFileEntityResponseCollection
+  usersPermissionsRole(documentId: ID!, status: PublicationStatus = PUBLISHED): UsersPermissionsRole
+  usersPermissionsRoles(
+    filters: UsersPermissionsRoleFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [UsersPermissionsRole]!
+  usersPermissionsRoles_connection(
+    filters: UsersPermissionsRoleFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): UsersPermissionsRoleEntityResponseCollection
+  usersPermissionsUser(documentId: ID!, status: PublicationStatus = PUBLISHED): UsersPermissionsUser
+  usersPermissionsUsers(
+    filters: UsersPermissionsUserFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): [UsersPermissionsUser]!
+  usersPermissionsUsers_connection(
+    filters: UsersPermissionsUserFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+    status: PublicationStatus = PUBLISHED
+  ): UsersPermissionsUserEntityResponseCollection
+}
+
+type ReviewWorkflowsWorkflow {
+  contentTypes: JSON!
+  createdAt: DateTime
+  documentId: ID!
+  name: String!
+  publishedAt: DateTime
+  stages(
+    filters: ReviewWorkflowsWorkflowStageFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [ReviewWorkflowsWorkflowStage]!
+  stages_connection(
+    filters: ReviewWorkflowsWorkflowStageFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): ReviewWorkflowsWorkflowStageRelationResponseCollection
+  updatedAt: DateTime
+}
+
+type ReviewWorkflowsWorkflowEntityResponseCollection {
+  nodes: [ReviewWorkflowsWorkflow!]!
+  pageInfo: Pagination!
+}
+
+input ReviewWorkflowsWorkflowFiltersInput {
+  and: [ReviewWorkflowsWorkflowFiltersInput]
+  contentTypes: JSONFilterInput
+  createdAt: DateTimeFilterInput
+  documentId: IDFilterInput
+  locale: StringFilterInput
+  localizations: ReviewWorkflowsWorkflowFiltersInput
+  name: StringFilterInput
+  not: ReviewWorkflowsWorkflowFiltersInput
+  or: [ReviewWorkflowsWorkflowFiltersInput]
+  publishedAt: DateTimeFilterInput
+  stages: ReviewWorkflowsWorkflowStageFiltersInput
+  updatedAt: DateTimeFilterInput
+}
+
+input ReviewWorkflowsWorkflowInput {
+  contentTypes: JSON
+  locale: String
+  name: String
+  publishedAt: DateTime
+  stages: [ID]
+}
+
+type ReviewWorkflowsWorkflowStage {
+  color: String
+  createdAt: DateTime
+  documentId: ID!
+  name: String
+  publishedAt: DateTime
+  updatedAt: DateTime
+  workflow: ReviewWorkflowsWorkflow
+}
+
+type ReviewWorkflowsWorkflowStageEntityResponseCollection {
+  nodes: [ReviewWorkflowsWorkflowStage!]!
+  pageInfo: Pagination!
+}
+
+input ReviewWorkflowsWorkflowStageFiltersInput {
+  and: [ReviewWorkflowsWorkflowStageFiltersInput]
+  color: StringFilterInput
+  createdAt: DateTimeFilterInput
+  documentId: IDFilterInput
+  locale: StringFilterInput
+  localizations: ReviewWorkflowsWorkflowStageFiltersInput
+  name: StringFilterInput
+  not: ReviewWorkflowsWorkflowStageFiltersInput
+  or: [ReviewWorkflowsWorkflowStageFiltersInput]
+  publishedAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  workflow: ReviewWorkflowsWorkflowFiltersInput
+}
+
+input ReviewWorkflowsWorkflowStageInput {
+  color: String
+  locale: String
+  name: String
+  publishedAt: DateTime
+  workflow: ID
+}
+
+type ReviewWorkflowsWorkflowStageRelationResponseCollection {
+  nodes: [ReviewWorkflowsWorkflowStage!]!
+}
+
+input StringFilterInput {
+  and: [String]
+  between: [String]
+  contains: String
+  containsi: String
+  endsWith: String
+  eq: String
+  eqi: String
+  gt: String
+  gte: String
+  in: [String]
+  lt: String
+  lte: String
+  ne: String
+  nei: String
+  not: StringFilterInput
+  notContains: String
+  notContainsi: String
+  notIn: [String]
+  notNull: Boolean
+  null: Boolean
+  or: [String]
+  startsWith: String
+}
+
+type UploadFile {
+  alternativeText: String
+  caption: String
+  createdAt: DateTime
+  documentId: ID!
+  ext: String
+  formats: JSON
+  hash: String!
+  height: Int
+  mime: String!
+  name: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  publishedAt: DateTime
+  related: [GenericMorph]
+  size: Float!
+  updatedAt: DateTime
+  url: String!
+  width: Int
+}
+
+type UploadFileEntityResponseCollection {
+  nodes: [UploadFile!]!
+  pageInfo: Pagination!
+}
+
+input UploadFileFiltersInput {
+  alternativeText: StringFilterInput
+  and: [UploadFileFiltersInput]
+  caption: StringFilterInput
+  createdAt: DateTimeFilterInput
+  documentId: IDFilterInput
+  ext: StringFilterInput
+  folderPath: StringFilterInput
+  formats: JSONFilterInput
+  hash: StringFilterInput
+  height: IntFilterInput
+  locale: StringFilterInput
+  localizations: UploadFileFiltersInput
+  mime: StringFilterInput
+  name: StringFilterInput
+  not: UploadFileFiltersInput
+  or: [UploadFileFiltersInput]
+  previewUrl: StringFilterInput
+  provider: StringFilterInput
+  provider_metadata: JSONFilterInput
+  publishedAt: DateTimeFilterInput
+  size: FloatFilterInput
+  updatedAt: DateTimeFilterInput
+  url: StringFilterInput
+  width: IntFilterInput
+}
+
+type UsersPermissionsCreateRolePayload {
+  ok: Boolean!
+}
+
+type UsersPermissionsDeleteRolePayload {
+  ok: Boolean!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String! = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UsersPermissionsMe {
+  blocked: Boolean
+  confirmed: Boolean
+  email: String
+  id: ID!
+  role: UsersPermissionsMeRole
+  username: String!
+}
+
+type UsersPermissionsMeRole {
+  description: String
+  id: ID!
+  name: String!
+  type: String
+}
+
+type UsersPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+type UsersPermissionsPermission {
+  action: String!
+  createdAt: DateTime
+  documentId: ID!
+  publishedAt: DateTime
+  role: UsersPermissionsRole
+  updatedAt: DateTime
+}
+
+input UsersPermissionsPermissionFiltersInput {
+  action: StringFilterInput
+  and: [UsersPermissionsPermissionFiltersInput]
+  createdAt: DateTimeFilterInput
+  documentId: IDFilterInput
+  locale: StringFilterInput
+  localizations: UsersPermissionsPermissionFiltersInput
+  not: UsersPermissionsPermissionFiltersInput
+  or: [UsersPermissionsPermissionFiltersInput]
+  publishedAt: DateTimeFilterInput
+  role: UsersPermissionsRoleFiltersInput
+  updatedAt: DateTimeFilterInput
+}
+
+type UsersPermissionsPermissionRelationResponseCollection {
+  nodes: [UsersPermissionsPermission!]!
+}
+
+input UsersPermissionsRegisterInput {
+  email: String!
+  password: String!
+  username: String!
+}
+
+type UsersPermissionsRole {
+  createdAt: DateTime
+  description: String
+  documentId: ID!
+  name: String!
+  permissions(
+    filters: UsersPermissionsPermissionFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [UsersPermissionsPermission]!
+  permissions_connection(
+    filters: UsersPermissionsPermissionFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsPermissionRelationResponseCollection
+  publishedAt: DateTime
+  type: String
+  updatedAt: DateTime
+  users(
+    filters: UsersPermissionsUserFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): [UsersPermissionsUser]!
+  users_connection(
+    filters: UsersPermissionsUserFiltersInput
+    pagination: PaginationArg = {}
+    sort: [String] = []
+  ): UsersPermissionsUserRelationResponseCollection
+}
+
+type UsersPermissionsRoleEntityResponseCollection {
+  nodes: [UsersPermissionsRole!]!
+  pageInfo: Pagination!
+}
+
+input UsersPermissionsRoleFiltersInput {
+  and: [UsersPermissionsRoleFiltersInput]
+  createdAt: DateTimeFilterInput
+  description: StringFilterInput
+  documentId: IDFilterInput
+  locale: StringFilterInput
+  localizations: UsersPermissionsRoleFiltersInput
+  name: StringFilterInput
+  not: UsersPermissionsRoleFiltersInput
+  or: [UsersPermissionsRoleFiltersInput]
+  permissions: UsersPermissionsPermissionFiltersInput
+  publishedAt: DateTimeFilterInput
+  type: StringFilterInput
+  updatedAt: DateTimeFilterInput
+  users: UsersPermissionsUserFiltersInput
+}
+
+input UsersPermissionsRoleInput {
+  description: String
+  locale: String
+  name: String
+  permissions: [ID]
+  publishedAt: DateTime
+  type: String
+  users: [ID]
+}
+
+type UsersPermissionsUpdateRolePayload {
+  ok: Boolean!
+}
+
+type UsersPermissionsUser {
+  blocked: Boolean
+  confirmed: Boolean
+  createdAt: DateTime
+  documentId: ID!
+  email: String!
+  provider: String
+  publishedAt: DateTime
+  role: UsersPermissionsRole
+  updatedAt: DateTime
+  username: String!
+}
+
+type UsersPermissionsUserEntityResponse {
+  data: UsersPermissionsUser
+}
+
+type UsersPermissionsUserEntityResponseCollection {
+  nodes: [UsersPermissionsUser!]!
+  pageInfo: Pagination!
+}
+
+input UsersPermissionsUserFiltersInput {
+  and: [UsersPermissionsUserFiltersInput]
+  blocked: BooleanFilterInput
+  confirmationToken: StringFilterInput
+  confirmed: BooleanFilterInput
+  createdAt: DateTimeFilterInput
+  documentId: IDFilterInput
+  email: StringFilterInput
+  locale: StringFilterInput
+  localizations: UsersPermissionsUserFiltersInput
+  not: UsersPermissionsUserFiltersInput
+  or: [UsersPermissionsUserFiltersInput]
+  password: StringFilterInput
+  provider: StringFilterInput
+  publishedAt: DateTimeFilterInput
+  resetPasswordToken: StringFilterInput
+  role: UsersPermissionsRoleFiltersInput
+  updatedAt: DateTimeFilterInput
+  username: StringFilterInput
+}
+
+input UsersPermissionsUserInput {
+  blocked: Boolean
+  confirmationToken: String
+  confirmed: Boolean
+  email: String
+  locale: String
+  password: String
+  provider: String
+  publishedAt: DateTime
+  resetPasswordToken: String
+  role: ID
+  username: String
+}
+
+type UsersPermissionsUserRelationResponseCollection {
+  nodes: [UsersPermissionsUser!]!
+}
