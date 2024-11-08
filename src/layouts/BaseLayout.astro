@@ -15,9 +15,9 @@ const { articleDate, description, image, title } = Astro.props;
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CCVVY2JB9"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        // eslint-disable-next-line
-        dataLayer.push(...arguments);
+      // eslint-disable-next-line
+      function gtag(...args: any) {
+        window.dataLayer.push(...args);
       }
       gtag("js", new Date());
 

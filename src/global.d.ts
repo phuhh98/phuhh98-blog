@@ -4,6 +4,11 @@ declare global {
       readonly PUBLIC_APP_BASE_URL: string;
     }
   }
+
+  interface Window {
+    // eslint-disable-next-line
+    dataLayer: any[];
+  }
 }
 
 export {};
