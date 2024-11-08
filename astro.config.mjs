@@ -11,7 +11,7 @@ import { remarkReadingTime } from "./src/utils/readTime.ts";
 
 // https://astro.build/config
 export default defineConfig({
-  // base: "/blog",
+  base: "something",
   integrations: [
     mdx({
       drafts: true,
