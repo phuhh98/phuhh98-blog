@@ -15,7 +15,5 @@
       "@/styles": ["src/styles/"],
       "@/graphql": ["src/codegen/graphql/type.graphql.ts"]
     }
-  },
-
-  "exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
+  }
 }
