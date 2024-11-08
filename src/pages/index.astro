@@ -2,6 +2,7 @@
 import ListCategories from "@/components/ListCategories";
 import ListPosts from "@/components/ListPosts";
 import TitlePage from "@/components/TitlePage";
+import { siteConfig } from "@/data/site.config";
 import BaseLayout from "@/layouts/BaseLayout";
 import { getPosts } from "@/utils";
 
@@ -10,7 +11,7 @@ const posts = await getPosts(MAX_POSTS);
 ---
 
 <BaseLayout title="Home">
-  <TitlePage title="Blog Title" />
+  <TitlePage title={siteConfig.title} />
   <ListCategories />
 
   <div>
