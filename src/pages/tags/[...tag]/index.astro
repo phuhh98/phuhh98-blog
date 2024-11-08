@@ -13,6 +13,10 @@ export async function getStaticPaths() {
   }));
 }
 
+type Props = {
+  tag: string;
+};
+
 const { tag } = Astro.props;
 
 const posts = await getPostByTag(tag);
