@@ -12,6 +12,13 @@
     <title>Content Manager</title>
   </head>
   <body>
-    <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+    <script>
+      import CMS from "decap-cms-app";
+      // Initialize the CMS object
+      CMS.init();
+      // TODO: Reference to custom edit UI https://decapcms.org/docs/customization/
+      // Now the registry is available via the CMS object.
+      // CMS.registerPreviewTemplate("my-template", MyTemplate);
+    </script>
   </body>
 </html>

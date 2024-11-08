@@ -3,7 +3,7 @@ backend:
   name: github
   repo: phuhh98/phuhh98.github.io
   branch: main
-  base_url: https://api.netlify.com
+  base_url: https://netlify-cms-github-oauth-provider-o2ex.onrender.com
   squash_merges: true
 
 # # config for local development, comment this before push to github
