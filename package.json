@@ -12,7 +12,8 @@
     "format:write": "prettier . --write",
     "format:check": "prettier . --check",
     "prepare": "husky",
-    "codegen": "graphql-codegen --config codegen.ts --watch"
+    "codegen": "graphql-codegen --config codegen.ts --watch",
+    "decap:server": "decap-server"
   },
   "lint-staged": {
     "**/*": [
@@ -57,6 +58,7 @@
     "@types/eslint__js": "^8.42.3",
     "@typescript-eslint/eslint-plugin": "^8.13.0",
     "@typescript-eslint/parser": "^8.13.0",
+    "decap-server": "^3.1.2",
     "dotenv": "^16.4.5",
     "eslint": "^9.14.0",
     "eslint-config-prettier": "^9.1.0",
