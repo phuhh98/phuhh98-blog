@@ -1,8 +1,7 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      readonly STRAPI_GRAPHQL_AUTH: string;
-      readonly STRAPI_GRAPHQL_ENDPOINT: string;
+      readonly PUBLIC_APP_BASE_URL: string;
     }
   }
 }

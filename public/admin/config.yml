@@ -1,17 +1,17 @@
 # Go live, uncomment this before push to github
-# backend:
-#   name: github
-#   repo: phuhh98/blog
-#   branch: main
-#   base_url: https://api.netlify.com
-
-# config for local development, comment this before push to github
 backend:
-  name: proxy
-  proxy_url: http://localhost:8081/api/v1
-  branch: master # optional, defaults to master
-local_backend: true # to work with local git, comment this before push
-# end local dev block
+  name: github
+  repo: phuhh98/blog
+  branch: main
+  base_url: https://api.netlify.com
+
+# # config for local development, comment this before push to github
+# backend:
+#   name: proxy
+#   proxy_url: http://localhost:8081/api/v1
+#   branch: master # optional, defaults to master
+# local_backend: true # to work with local git, comment this before push
+# # end local dev block
 
 media_folder: "src/assets/images" # Location where files will be stored in the repo
 public_folder: "src/assets/images" # The src attribute for uploaded media
@@ -20,10 +20,42 @@ collections:
     label: "Blog" # Used in the UI
     folder: "src/content/blog" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{slug}}"
+    preview_path: blog/{{slug}}
     fields: # The fields for each document, usually in frontmatter
-      - { label: "Layout", name: "layout", widget: "hidden", default: "blog" }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "thumbnail", widget: "image" }
-      - { label: "Rating (scale of 1-5)", name: "rating", widget: "number" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: Layout
+        name: layout
+        widget: hidden
+        default: blog
+
+      - label: Category
+        name: category
+        widget: string
+
+      - label: Description
+        name: decscription
+        widget: string
+
+      - label: Title
+        name: title
+        widget: string
+
+      - label: Publish Date
+        name: pubDate
+        widget: datetime
+
+      - label: Hero image
+        name: heroImage
+        widget: image
+
+      - label: Rating (scale of 1-5)
+        name: rating
+        widget: number
+
+      - label: Body
+        name: body
+        widget: markdown
+
+      - label: Draft
+        name: Draft
+        widget: Boolean
