@@ -1,7 +1,7 @@
 # Go live, uncomment this before push to github
 backend:
   name: github
-  repo: phuhh98/blog
+  repo: phuhh98/phuhh98.github.io
   branch: main
   base_url: https://api.netlify.com
   squash_merges: true
