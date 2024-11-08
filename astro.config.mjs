@@ -3,7 +3,7 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import sentry from "@sentry/astro";
-import spotlightjs from "@spotlightjs/astro";
+// import spotlightjs from "@spotlightjs/astro";
 // @ts-check
 import { defineConfig } from "astro/config";
 
@@ -28,7 +28,7 @@ export default defineConfig({
     react(),
     tailwind(),
     sentry(),
-    spotlightjs(),
+    // spotlightjs(),
   ],
   markdown: {
     drafts: true,

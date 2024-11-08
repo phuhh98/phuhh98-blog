@@ -1,11 +1,10 @@
 ---
-import Disqus from "@/components/Disqus";
+import Giscus from "@/components/Giscus";
 import ListRelatedPosts from "@/components/ListRelatedPosts";
 import Code from "@/components/mdx/Code";
 import SButton from "@/components/mdx/SButton";
 import Share from "@/components/Share";
 import TableOfContents from "@/components/TableOfContents";
-import { disqusConfig } from "@/data/disqus.config";
 import BlogPost from "@/layouts/BlogPost";
 import { getPosts } from "@/utils";
 import { type CollectionEntry, getCollection } from "astro:content";
@@ -34,8 +33,6 @@ const getRelatedPosts = (post: Props) => {
 const relatedPosts = getRelatedPosts(post);
 
 const { Content, headings, remarkPluginFrontmatter } = await post.render();
-
-const disqusEnabled = disqusConfig.enabled;
 ---
 
 <BlogPost data={post.data} headings={headings} id={post.id} readTime={remarkPluginFrontmatter.minutesRead}>
@@ -62,5 +59,5 @@ const disqusEnabled = disqusConfig.enabled;
     </article>
   </div>
 
-  {disqusEnabled && <Disqus />}
+  <Giscus />
 </BlogPost>

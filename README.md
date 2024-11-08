@@ -54,5 +54,9 @@ At this point you could access page at [localhost:4321](http://localhost:4321/) 
 > [!CAUTION]
 > Be aware to revert comment block in config before push to github to let action do its job for deploying page
 
+## Comments
+
+Comment section for each post is manage by integrating with Github Dicussion and [giscus](https://giscus.app/) app which will handle threads and dicussion via installed **giscus** app to current repo/account.
+
 GET GO
 ![Alt Text](https://media1.tenor.com/m/1PHH8ktiN84AAAAd/sml-dewey-donedidit.gif)

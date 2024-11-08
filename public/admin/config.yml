@@ -1,18 +1,21 @@
-# Go live, uncomment this before push to github
+# # Go live, uncomment this before push to github
 # backend:
 #   name: github
 #   repo: phuhh98/blog
 #   branch: main
 #   base_url: https://api.netlify.com
+#   squash_merges: true
 
 # config for local development, comment this before push to github
 backend:
   name: proxy
   proxy_url: http://localhost:8081/api/v1
   branch: master # optional, defaults to master
+  squash_merges: true
 local_backend: true # to work with local git, comment this before push
 # end local dev block
 
+publish_mode: editorial_workflow # https://decapcms.org/docs/editorial-workflows/
 media_folder: "src/assets/images" # Location where files will be stored in the repo
 public_folder: "src/assets/images" # The src attribute for uploaded media
 collections:
@@ -20,10 +23,65 @@ collections:
     label: "Blog" # Used in the UI
     folder: "src/content/blog" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{slug}}"
+    preview_path: blog/{{slug}}
     fields: # The fields for each document, usually in frontmatter
-      - { label: "Layout", name: "layout", widget: "hidden", default: "blog" }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "thumbnail", widget: "image" }
-      - { label: "Rating (scale of 1-5)", name: "rating", widget: "number" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: Title
+        name: title
+        widget: string
+
+      - label: Description
+        name: description
+        widget: string
+
+      - label: Publish Date
+        name: pubDate
+        widget: datetime
+
+      - label: Hero image
+        name: heroImage
+        widget: image
+
+      - label: Category
+        name: category
+        widget: relation
+        collection: "category"
+        search_fields: ["name"]
+        value_field: "name"
+
+      - label: Tags
+        name: tags
+        widget: relation
+        collection: "tag"
+        search_fields: ["name"]
+        value_field: "name"
+        multiple: true
+        min: 1
+
+      - label: Body
+        name: body
+        widget: markdown
+
+  - name: "category"
+    label: "Category"
+    folder: src/content/category
+    identifier_field: name
+    create: true
+    fields:
+      - label: "Name"
+        name: "name"
+        widget: string
+
+  - name: "tag"
+    label: "Tag"
+    folder: src/content/tag
+    create: true
+    identifier_field: name
+    fields:
+      - label: "Name"
+        name: "name"
+        widget: string
+      - label: "Code"
+        name: "code"
+        widget: "code"
+        required: false
