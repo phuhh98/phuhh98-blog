@@ -1,0 +1,40 @@
+---
+import ListCategories from "@/components/ListCategories";
+import ListPosts from "@/components/ListPosts";
+import Pagination from "@/components/Pagination";
+import TitlePage from "@/components/TitlePage";
+import { siteConfig } from "@/data/site.config";
+import BaseLayout from "@/layouts/BaseLayout";
+import { getCategories, getPosts, sluglify, unsluglify } from "@/utils";
+
+// eslint-disable-next-line
+export async function getStaticPaths({ paginate }: any) {
+  const categories = await getCategories();
+  const allPosts = await getPosts();
+
+  return categories.flatMap((category: string) => {
+    // eslint-disable-next-line
+    const unsluglifyNameCategory = unsluglify(category!.toLowerCase());
+    const filteredPosts = allPosts.filter((post) => post.data.category.toLowerCase() === unsluglifyNameCategory);
+
+    return paginate(filteredPosts, {
+      pageSize: siteConfig.paginationSize,
+      params: {
+        category: sluglify(category.toLowerCase()),
+      },
+    });
+  });
+}
+const params = Astro.params;
+const { page } = Astro.props;
+// eslint-disable-next-line
+const unsluglifyNameCategory = unsluglify(params.category!.toLowerCase());
+const posts = page.data;
+---
+
+<BaseLayout title={params.category}>
+  <TitlePage title={unsluglifyNameCategory} />
+  <ListCategories activeCategory={params.category} />
+  <ListPosts posts={posts} />
+  <Pagination page={page} />
+</BaseLayout>
