@@ -1,3 +1,0 @@
-# .graphqlrc.yml or graphql.config.yml
-schema: "src/codegen/schema/schema.graphql"
-documents: "src/codegen/**/*.{graphql,gql}"

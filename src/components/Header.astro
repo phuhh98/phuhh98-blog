@@ -1,25 +1,30 @@
 ---
 import HeaderLink from "@/components/HeaderLink";
 import GithubIcon from "@/components/icons/GithubIcon";
-import TwitterIcon from "@/components/icons/TwitterIcon";
 import Search from "@/components/Search";
 
+import GithubIconAnimated from "./icons/GithubIconAnimated.astro";
+import IconHoverAlternate from "./icons/IconHoverAlternate";
 import MenuIcon from "./icons/MenuIcon.astro";
 import TagIcon from "./icons/TagIcon.astro";
+import XIcon from "./icons/XIcon.astro";
+import XIconAnimated from "./icons/XIconAnimated.astro";
 import ToggleTheme from "./ToggleTheme.astro";
 
 // ADD YOUR SOCIAL NETWORKS HERE
 const SOCIALNETWORKS = [
   {
+    animatedIcon: GithubIconAnimated,
     icon: GithubIcon,
     name: "Github",
-    url: "https://github.com/danielcgilibert/blog-template",
+    url: import.meta.env.PUBLIC_GITHUB_PROFILE_URl,
   },
 
   {
-    icon: TwitterIcon,
-    name: "Twitter",
-    url: "https://github.com/danielcgilibert/blog-template",
+    animatedIcon: XIconAnimated,
+    icon: XIcon,
+    name: "X",
+    url: import.meta.env.PUBLIC_X_PROFILE_URL,
   },
 ];
 ---
@@ -42,7 +47,10 @@ const SOCIALNETWORKS = [
         {
           SOCIALNETWORKS.map((network) => (
             <HeaderLink aria-label={network.name} class="" href={network.url} target="_blank">
-              <span>{<network.icon />} </span>
+              <IconHoverAlternate client:load="react">
+                <network.icon size={24} slot="base" />
+                <network.animatedIcon size={24} slot="alternate" />
+              </IconHoverAlternate>
             </HeaderLink>
           ))
         }

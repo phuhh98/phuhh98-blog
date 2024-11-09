@@ -1,19 +1,19 @@
-# # Go live, uncomment this before push to github
-# backend:
-#   name: github
-#   repo: phuhh98/phuhh98.github.io
-#   branch: main
-#   base_url: https://netlify-cms-github-oauth-provider-o2ex.onrender.com
-#   squash_merges: true
-
-# config for local development, comment this before push to github
+# Go live, uncomment this before push to github
 backend:
-  name: proxy
-  proxy_url: http://localhost:8081/api/v1
-  branch: master # optional, defaults to master
+  name: github
+  repo: phuhh98/phuhh98.github.io
+  branch: main
+  base_url: https://netlify-cms-github-oauth-provider-o2ex.onrender.com
   squash_merges: true
-local_backend: true # to work with local git, comment this before push
-# end local dev block
+
+# # config for local development, comment this before push to github
+# backend:
+#   name: proxy
+#   proxy_url: http://localhost:8081/api/v1
+#   branch: master # optional, defaults to master
+#   squash_merges: true
+# local_backend: true # to work with local git, comment this before push
+# # end local dev block
 
 publish_mode: editorial_workflow # https://decapcms.org/docs/editorial-workflows/
 media_folder: "src/assets/images" # Location where files will be stored in the repo

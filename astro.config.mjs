@@ -3,8 +3,8 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 // import spotlightjs from "@spotlightjs/astro";
-// @ts-check
 import { defineConfig } from "astro/config";
+import icon from "astro-icon";
 
 import { remarkReadingTime } from "./src/utils/readTime.ts";
 
@@ -26,9 +26,10 @@ export default defineConfig({
       syntaxHighlight: "shiki",
     }),
     sitemap(),
-    react(),
-    tailwind(), // spotlightjs(),
+    react(), // spotlightjs(),
     // icon(),
+    tailwind(),
+    icon(),
   ],
   markdown: {
     drafts: true,
