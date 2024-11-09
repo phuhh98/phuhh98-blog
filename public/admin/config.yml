@@ -23,6 +23,8 @@ collections:
     label: "Blog" # Used in the UI
     folder: "src/content/blog" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
+    extension: mdx
+    format: yaml-frontmatter
     slug: "{{year}}-{{month}}-{{slug}}"
     preview_path: blog/{{slug}}
     fields: # The fields for each document, usually in frontmatter
@@ -65,8 +67,10 @@ collections:
   - name: "category"
     label: "Category"
     folder: src/content/category
-    identifier_field: name
     create: true
+    identifier_field: name
+    extension: yaml
+    format: yaml
     fields:
       - label: "Name"
         name: "name"
@@ -77,11 +81,9 @@ collections:
     folder: src/content/tag
     create: true
     identifier_field: name
+    extension: yaml
+    format: yaml
     fields:
       - label: "Name"
         name: "name"
         widget: string
-      - label: "Code"
-        name: "code"
-        widget: "code"
-        required: false

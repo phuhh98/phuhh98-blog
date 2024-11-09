@@ -2,12 +2,13 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-import sentry from "@sentry/astro";
 // import spotlightjs from "@spotlightjs/astro";
-// @ts-check
 import { defineConfig } from "astro/config";
+import icon from "astro-icon";
 
 import { remarkReadingTime } from "./src/utils/readTime.ts";
+
+// import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,10 +26,10 @@ export default defineConfig({
       syntaxHighlight: "shiki",
     }),
     sitemap(),
-    react(),
+    react(), // spotlightjs(),
+    // icon(),
     tailwind(),
-    sentry(),
-    // spotlightjs(),
+    icon(),
   ],
   markdown: {
     drafts: true,

@@ -36,6 +36,7 @@ export default tseslint.config(
   },
   {
     rules: {
+      "@typescript-eslint/ban-ts-comment": ["off"],
       "@typescript-eslint/triple-slash-reference": ["off"],
       "no-console": ["error"],
     },
@@ -47,6 +48,7 @@ export default tseslint.config(
       "no-console": ["off"],
       "no-irregular-whitespace": ["off"],
       "no-undef": ["warn"],
+      "no-unused-expressions": ["error", { allowShortCircuit: true }],
     },
   },
   includeIgnoreFile(gitignorePath),
