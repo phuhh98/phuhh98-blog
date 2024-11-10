@@ -12,3 +12,11 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+interface Window {
+  // eslint-disable-next-line
+  dataLayer: any[];
+}
+// Google analytic gtag
+// eslint-disable-next-line
+declare var dataLayer: any[];
