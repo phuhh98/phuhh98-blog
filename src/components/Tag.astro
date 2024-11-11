@@ -5,10 +5,12 @@ export interface Props {
 const { tag } = Astro.props;
 ---
 
-<a aria-label={tag} href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}>
-  <span
-    class="bg-indigo-600 font-semibold text-white dark:bg-indigo-900 dark:text-white shadow text-sm w-fit px-2 py-1 md:px-5 md:py-2 rounded-full"
-  >
-    {tag ?? "Blog Tag"}
-  </span>
-</a>
+<div>
+  <a aria-label={tag} href={`/tags/${encodeURIComponent(tag)}`}>
+    <span
+      class={`bg-gray-200 block font-semibold text-gray-700 dark:bg-indigo-900 dark:text-white dark:hover:bg-indigo-400 hover:bg-indigo-300 shadow text-sm w-fit px-2 py-1 md:px-5 md:py-2 rounded-full`}
+    >
+      {tag ? `#${tag}` : "Tag"}
+    </span>
+  </a>
+</div>

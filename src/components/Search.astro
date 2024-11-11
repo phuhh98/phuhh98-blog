@@ -3,11 +3,12 @@
 
 import "@pagefind/default-ui/css/ui.css";
 import SearchIcon from "@/components/icons/SearchIcon";
+import SearchBar from "astro-pagefind/components/Search";
 ---
 
 <site-search class="ms-auto" id="search">
   <button class="flex items-center justify-center rounded-md gap-1" data-open-modal disabled>
-    <SearchIcon />
+    <SearchIcon size={24} />
     <!-- <span class='md:hidden text-2xl'> Search</span> -->
   </button>
   <dialog
@@ -17,29 +18,19 @@ import SearchIcon from "@/components/icons/SearchIcon";
     <div class="dialog-frame flex flex-col gap-4 p-6 pt-12 sm:pt-6">
       <button
         class="ms-auto cursor-pointer rounded-full bg-black text-white px-4 py-2 dark:bg-white dark:text-black"
-        data-close-modal
-        >Close</button
+        data-close-modal>Close</button
       >
-      {
-        import.meta.env.DEV ? (
-          <div class="mx-auto text-center dark:text-white">
-            <p>
-              Search is only available in production builds. <br />
-              Try building and previewing the site to test it out locally.
-            </p>
-          </div>
-        ) : (
-          <div class="search-container dark:text-white">
-            <div id="pagefind__search" />
-          </div>
-        )
-      }
+
+      <div class="search-container dark:text-white">
+        <SearchBar className="pagefind-ui" id="search" uiOptions={{ showImages: true, showSubResults: true }} />
+      </div>
     </div>
   </dialog>
 </site-search>
 
 <script>
   import { animate } from "motion";
+  import { DIALOG_ANIMATION_DURATOIN_SECOND } from "src/constants/animation";
   class SiteSearch extends HTMLElement {
     constructor() {
       super();
@@ -65,13 +56,16 @@ import SearchIcon from "@/components/icons/SearchIcon";
       const openModal = (event?: MouseEvent) => {
         dialog.showModal();
 
+        /**
+         * Appear expand top down animation
+         */
         animate(
           "dialog",
           {
             clipPath: ["polygon(0 0, 100% 0, 100% -200%, -200% -200%)", "polygon(0 0, 100% 0, 100% 100%, 0% 100%)"],
             opacity: [0, 1],
           },
-          { duration: 0.2 },
+          { duration: DIALOG_ANIMATION_DURATOIN_SECOND },
         );
         document.body.classList.add("overflow-hidden");
         this.querySelector("input")?.focus();
@@ -81,7 +75,20 @@ import SearchIcon from "@/components/icons/SearchIcon";
       };
 
       const closeModal = () => {
-        dialog.close();
+        /**
+         * Disappear collapse down top animation
+         */
+        animate(
+          "dialog",
+          {
+            clipPath: ["polygon(0 0, 100% 0, 100% 100%, 0% 100%)", "polygon(0 0, 100% 0, 100% -200%, -200% -200%)"],
+            opacity: [1, 0],
+          },
+          { duration: DIALOG_ANIMATION_DURATOIN_SECOND },
+        );
+
+        setTimeout(() => dialog.close(), (DIALOG_ANIMATION_DURATOIN_SECOND / 2) * 1000);
+
         document.body.classList.remove("overflow-hidden");
         window.removeEventListener("click", onWindowClick);
         window.addEventListener("keydown", handleEscKey);
@@ -99,33 +106,21 @@ import SearchIcon from "@/components/icons/SearchIcon";
           e.preventDefault();
         }
       });
-
-      window.addEventListener("DOMContentLoaded", () => {
-        if (import.meta.env.DEV) return;
-        const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
-        onIdle(async () => {
-          // @ts-expect-error : there's no ts declaration available for now
-          const { PagefindUI } = await import("@pagefind/default-ui");
-          new PagefindUI({
-            baseUrl: import.meta.env.BASE_URL,
-          bundlePath: import.meta.env.BASE_URL.replace(/\/$/, "") + "/pagefind/",
-          element: "#pagefind__search",
-          showImages: false,
-          });
-        });
-      });
+      //   if (import.meta.env.DEV) return;
+      //   const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+      //   onIdle(async () => {
+      //     // @ts-expect-error : there's no ts declaration available for now
+      //     const { PagefindUI } = await import("@pagefind/default-ui");
+      //     new PagefindUI({
+      //       baseUrl: import.meta.env.BASE_URL,
+      //       bundlePath: import.meta.env.BASE_URL.replace(/\/$/, "") + "/pagefind/",
+      //       element: "#pagefind__search",
+      //       showImages: false,
+      //     });
+      //   });
+      // });
     }
   }
 
   customElements.define("site-search", SiteSearch);
 </script>
-
-<style is:global>
-  .dark {
-    --pagefind-ui-primary: #eeeeee;
-    --pagefind-ui-text: #eeeeee;
-    --pagefind-ui-background: #152028;
-    --pagefind-ui-border: #152028;
-    --pagefind-ui-tag: #152028;
-  }
-</style>

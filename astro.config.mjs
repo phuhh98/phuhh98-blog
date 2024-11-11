@@ -5,6 +5,7 @@ import tailwind from "@astrojs/tailwind";
 // import spotlightjs from "@spotlightjs/astro";
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
+import pagefind from "astro-pagefind";
 
 import { remarkReadingTime } from "./src/utils/readTime.ts";
 
@@ -27,6 +28,7 @@ export default defineConfig({
     react(), // spotlightjs(),
     tailwind(),
     icon(),
+    pagefind(),
   ],
   markdown: {
     drafts: true,

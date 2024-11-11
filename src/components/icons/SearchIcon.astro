@@ -1,13 +1,40 @@
-<svg
-  aria-label="search"
-  class="h-6 w-6"
-  fill="none"
-  stroke="currentColor"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  stroke-width="1.5"
-  viewBox="0 0 24 24"
->
-  <path d="M0 0h24v24H0z" stroke="none"></path>
-  <path d="M3 10a7 7 0 1 0 14 0 7 7 0 1 0-14 0M21 21l-6-6"></path>
-</svg>
+---
+import type { ComponentProps } from "astro/types";
+
+import { Icon } from "astro-icon/components";
+
+type Props = Omit<ComponentProps<typeof Icon>, "name">;
+---
+
+<Icon {...Astro.props} id={"search-icon-wiggle"} name="search-static" />
+
+<script>
+  import { animate } from "motion";
+  import { ICON_ANIMATION_DURATION_SECOND } from "src/constants/animation";
+
+  /**
+   * Spin vetical
+   */
+  const animation = animate(
+    "#search-icon-wiggle",
+    { scaleX: [1, 0, -1, 0, 1] },
+    { duration: ICON_ANIMATION_DURATION_SECOND },
+  );
+
+  let inPlay = false;
+
+  animation.pause();
+  const searchIcon = document.getElementById("search-icon-wiggle");
+
+  searchIcon?.addEventListener("mouseenter", () => {
+    if (!inPlay) {
+      animation.play();
+      inPlay = true;
+    }
+  });
+
+  searchIcon?.addEventListener("mouseleave", () => {
+    animation.finish();
+    inPlay = false;
+  });
+</script>

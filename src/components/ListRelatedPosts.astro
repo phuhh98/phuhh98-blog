@@ -16,21 +16,31 @@ const { posts } = Astro.props;
     posts.length > 0 ? (
       posts.map((post) => {
         return (
-          <div class="flex flex-wrap gap-2">
-            <div class="min-h-full">
+          <div class={cn("flex flex-row gap-1 w-[14rem]")}>
+            <div class={cn("min-h-full")}>
               <Image
                 alt={`img of ${post.data.title}`}
-                class="w-16 h-16 object-cover rounded-full  "
+                class={cn("w-16 h-16 object-cover rounded-full")}
                 format="webp"
-                height={200}
+                height={100}
                 src={post.data.heroImage}
-                width={200}
+                width={100}
               />
             </div>
-            <header class="flex justify-center items-center">
-              <a class="font-medium  hover:underline" href={`/post/${post.slug}/`}>
-                {post.data.title}
-              </a>
+            <header class={cn("flex flex-col justify-center items-start gap-0 min-w-[50%]")}>
+              <div>
+                <a class="font-medium hover:underline" href={`/post/${post.slug}/`}>
+                  {post.data.title}
+                </a>
+              </div>
+
+              <div class="flex flex-wrap">
+                {post.data.tags.map((tag) => (
+                  <span class="text-xxs text-gray-600 hover:underline">
+                    <a href={`/tags/${encodeURIComponent(tag)}`}>#{tag}</a>&nbsp;
+                  </span>
+                ))}
+              </div>
             </header>
           </div>
         );
