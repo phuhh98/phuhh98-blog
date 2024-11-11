@@ -8,7 +8,7 @@ const { tag } = Astro.props;
 <div>
   <a aria-label={tag} href={`/tags/${encodeURIComponent(tag)}`}>
     <span
-      class={`bg-gray-200 block font-semibold text-gray-700 dark:bg-indigo-900 dark:text-white dark:hover:bg-indigo-400 hover:bg-indigo-300 shadow text-sm w-fit px-2 py-1 md:px-5 md:py-2 rounded-full`}
+      class={`bg-slate-200 block font-semibold text-gray-700 dark:bg-indigo-900 dark:text-white dark:hover:bg-indigo-400 hover:bg-indigo-300 shadow text-sm w-fit px-2 py-1 md:px-5 md:py-2 rounded-full`}
     >
       {tag ? `#${tag}` : "Tag"}
     </span>
