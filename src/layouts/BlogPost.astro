@@ -42,22 +42,20 @@ const articleDate = pubDate.toISOString();
       </div>
     </header>
 
-    <>
-      {
-        heroImage && (
-          <Image
-            alt={`img of ${title}`}
-            class="rounded-md w-full max-h-[300px]  md:max-h-[500px] my-8 object-cover"
-            format="jpg"
-            height={500}
-            loading="eager"
-            quality={100}
-            src={heroImage}
-            width={1000}
-          />
-        )
-      }
-    </>
+    {
+      heroImage && (
+        <Image
+          alt={`img of ${title}`}
+          class="rounded-md w-full max-h-[300px]  md:max-h-[500px] my-8 object-cover"
+          format="jpg"
+          height={500}
+          loading="eager"
+          quality={100}
+          src={heroImage}
+          width={1000}
+        />
+      )
+    }
 
     <hr />
 
@@ -73,29 +71,36 @@ const articleDate = pubDate.toISOString();
       entries: IntersectionObserverEntry[],
       // observer: IntersectionObserver
     ) {
+      const normalPageIndexStateLight = ["text-stone-400", "hover:text-stone-900", "hover:font-bold"];
+      const activePageIndexStyleLight = [
+        "font-bold",
+        "text-stone-900",
+        "bg-gradient-to-r",
+        "from-orange-400",
+        "to-orange-200",
+        "shadow-[3px_1px_0px_1px_rgba(251,146,60,0.6)]",
+      ];
+
+      const normalPageIndexStateDark = ["dark:text-stone-300", "dark:hover:text-stone-100", "dark:hover:font-bold"];
+
+      const activePageIndexStyleDark = [
+        "font-bold",
+        "dark:text-stone-100",
+        "dark:bg-gradient-to-r",
+        "dark:from-emerald-600",
+        "dark:to-emerald-400",
+        "dark:shadow-[3px_1px_0px_1px_rgba(167,243,208,0.3)]",
+      ];
+
       entries.forEach((entry) => {
         const index = document.querySelector(`aside a[href="#${entry.target.id}"]`);
 
+        index?.classList.add(...normalPageIndexStateLight, ...normalPageIndexStateDark);
         if (entry.isIntersecting) {
-          index?.classList.remove("bg-slate-200", "dark:bg-slate-800"); // remove bg
-          index?.classList.add(
-            "bg-indigo-600",
-            "dark:bg-indigo-700",
-            "text-white",
-            "font-bold",
-            "transition-colors",
-            "duration-200",
-          );
+          index?.classList.remove("text-stone-400");
+          index?.classList.add(...activePageIndexStyleLight, ...activePageIndexStyleDark);
         } else {
-          index?.classList.add("bg-slate-200", "dark:bg-slate-800"); // add bg
-          index?.classList.remove(
-            "bg-indigo-600",
-            "dark:bg-indigo-700",
-            "text-white",
-            "font-bold",
-            "transition-colors",
-            "duration-200",
-          );
+          index?.classList.remove(...activePageIndexStyleLight, ...activePageIndexStyleDark);
         }
       });
     }

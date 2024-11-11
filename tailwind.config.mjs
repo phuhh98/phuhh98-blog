@@ -14,6 +14,9 @@ export default {
       fontFamily: {
         body: ["Manrope", ...defaultTheme.fontFamily.sans],
       },
+      fontSize: {
+        xxs: "0.5rem",
+      },
       gridTemplateColumns: {
         list: "repeat(auto-fill, minmax(400px, max-content))",
       },

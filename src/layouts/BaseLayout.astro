@@ -12,7 +12,7 @@ const { articleDate, description, image, title } = Astro.props;
 <html class="scroll-smooth" lang="en">
   <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5CCVVY2JB9"></script>
+    <script async is:inline src="https://www.googletagmanager.com/gtag/js?id=G-5CCVVY2JB9"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       // eslint-disable-next-line
@@ -31,7 +31,7 @@ const { articleDate, description, image, title } = Astro.props;
 
   <body class="bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white">
     <main
-      class="px-5 sm:mx-auto sm:max-w-2xl sm:px-8 lg:px-0 antialiased md:max-w-6xl grid gap-12 mt-4 overflow-hidden md:overflow-visible"
+      class="px-5 sm:mx-auto sm:max-w-2xl sm:px-8 lg:px-0 antialiased md:max-w-6xl grid gap-12 mt-0 overflow-hidden md:overflow-visible"
     >
       <Header />
       <slot />

@@ -5,7 +5,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "baseUrl": ".",
-    "verbatimModuleSyntax": false,
+    "verbatimModuleSyntax": true,
     "paths": {
       "@/components/*": ["src/components/*.astro"],
       "@/layouts/*": ["src/layouts/*.astro"],
@@ -15,5 +15,6 @@
       "@/styles": ["src/styles/"],
       "@/graphql": ["src/codegen/graphql/type.graphql.ts"]
     }
-  }
+  },
+  "exclude": ["./dist"]
 }
