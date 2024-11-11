@@ -15,12 +15,7 @@ export interface Props {
 ---
 
 <li class="flex flex-col">
-  <a
-    class={cn(
-      `dark:hover:text-indigo-600 hover:text-indigo-300 py-1 px-4 text-black dark:text-white mb-2 first-letter:uppercase w-fit line-clamp-2`,
-    )}
-    href={"#" + heading.slug}
-  >
+  <a class={cn(`py-1 px-4 mb-2 first-letter:uppercase w-fit line-clamp-2`)} href={"#" + heading.slug}>
     {heading.text}
   </a>
   {
