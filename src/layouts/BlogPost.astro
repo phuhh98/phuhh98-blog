@@ -97,7 +97,7 @@ const articleDate = pubDate.toISOString();
 
         index?.classList.add(...normalPageIndexStateLight, ...normalPageIndexStateDark);
         if (entry.isIntersecting) {
-          index?.classList.remove("text-stone-400");
+          index?.classList.remove("text-stone-400", "dark:text-stone-300");
           index?.classList.add(...activePageIndexStyleLight, ...activePageIndexStyleDark);
         } else {
           index?.classList.remove(...activePageIndexStyleLight, ...activePageIndexStyleDark);
