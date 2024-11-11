@@ -6,7 +6,7 @@ import { Icon } from "astro-icon/components";
 type Props = Omit<ComponentProps<typeof Icon>, "name">;
 ---
 
-<Icon {...Astro.props} id={"search-icon-wiggle"} name="search-static" />
+<Icon id={"search-icon-wiggle"} {...Astro.props} name="search-static" />
 
 <script>
   import { animate } from "motion";
@@ -18,12 +18,11 @@ type Props = Omit<ComponentProps<typeof Icon>, "name">;
   const animation = animate(
     "#search-icon-wiggle",
     { scaleX: [1, 0, -1, 0, 1] },
-    { duration: ICON_ANIMATION_DURATION_SECOND },
+    { autoplay: false, duration: ICON_ANIMATION_DURATION_SECOND },
   );
 
   let inPlay = false;
 
-  animation.pause();
   const searchIcon = document.getElementById("search-icon-wiggle");
 
   searchIcon?.addEventListener("mouseenter", () => {

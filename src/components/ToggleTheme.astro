@@ -4,6 +4,29 @@ import SunIcon from "@/components/icons/SunIcon";
 ---
 
 <script>
+  import { animate } from "motion";
+  import { ICON_ANIMATION_DURATION_SECOND } from "src/constants/animation";
+
+  const sunExpandAnimation = animate(
+    "#sun-expand",
+    {
+      display: ["none", "block", "none"],
+      opacity: [0, 100, 0],
+      transform: ["rotate(0deg) scale(1)", "rotate(720deg) scale(10)", "rotate(360deg) scale(100)"],
+    },
+    { autoplay: false, duration: ICON_ANIMATION_DURATION_SECOND * 2 },
+  );
+
+  const sunCollapsedAnimation = animate(
+    "#sun-collapse",
+    {
+      display: ["none", "block", "none"],
+      opacity: [0, 100, 0],
+      transform: ["rotate(360deg) scale(100)", "rotate(720deg) scale(10)", "rotate(0deg) scale(1)"],
+    },
+    { autoplay: false, duration: ICON_ANIMATION_DURATION_SECOND * 2 },
+  );
+
   class themeToggle extends HTMLElement {
     constructor() {
       super();
@@ -14,13 +37,33 @@ import SunIcon from "@/components/icons/SunIcon";
           if (e.currentTarget instanceof HTMLButtonElement) {
             const isPressed = e.currentTarget.getAttribute("aria-pressed") === "true";
             const themeChangeEvent = new CustomEvent("theme-change", {
-            detail: {
-              theme: isPressed ? "light" : "dark",
-            },
-          });
-            // dispatch event -> ThemeProvider.astro
-            document.dispatchEvent(themeChangeEvent);
-            button.setAttribute("aria-pressed", String(!isPressed));
+              detail: {
+                theme: isPressed ? "light" : "dark",
+              },
+            });
+
+            if (isPressed) {
+              sunExpandAnimation.play();
+              setTimeout(
+                () => {
+                  sunExpandAnimation.finish();
+                },
+                ICON_ANIMATION_DURATION_SECOND * 2 * 1000,
+              );
+            } else {
+              sunCollapsedAnimation.play();
+              setTimeout(
+                () => {
+                  sunCollapsedAnimation.finish();
+                },
+                ICON_ANIMATION_DURATION_SECOND * 2 * 1000,
+              );
+            }
+
+            setTimeout(() => {
+              document.dispatchEvent(themeChangeEvent);
+              button.setAttribute("aria-pressed", String(!isPressed));
+            }, ICON_ANIMATION_DURATION_SECOND * 1000);
           }
         });
       }
@@ -35,14 +78,16 @@ import SunIcon from "@/components/icons/SunIcon";
 <theme-toggle class="relative h-6 w-6">
   <button aria-label="Toggle Theme" class="group" id="toggle-theme">
     <span class="absolute left-0 right-0 top-0 opacity-0 group-aria-pressed:opacity-100">
-      <SunIcon />
+      <SunIcon size={24} />
     </span>
 
-    <span class="absolute left-0 right-0 top-0 opacity-0 group-aria-[pressed=false]:opacity-100">
+    <span class="absolute left-0 right-0 top-0 opacity-0 group-aria-[pressed=false]:opacity-100" id="moon-icon">
       <MoonIcon />
     </span>
   </button>
 </theme-toggle>
+<SunIcon class="absolute right-9 md:right-0 top-3 opacity-0 hidden" id="sun-expand" size={24} z={-100} />
+<SunIcon class="absolute right-9 md:right-0 top-3 opacity-0 hidden" id="sun-collapse" size={24} z={-100} />
 
 <script is:inline>
   const button = document.getElementById("toggle-theme");

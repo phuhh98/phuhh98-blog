@@ -2,7 +2,7 @@
 import { siteConfig } from "@/data/site.config";
 
 import LinkedinIcon from "./icons/linkedinIcon.astro";
-import TwitterColorIcon from "./icons/TwitterColorIcon.astro";
+import XIcon from "./icons/XIcon.astro";
 const message = siteConfig.shareMessage;
 
 const URL = Astro.url.href;
@@ -11,13 +11,17 @@ const URL = Astro.url.href;
 <div class="flex flex-col gap-2">
   <span class="mb-1 font-bold text-2xl">Share</span>
   <ul class="flex gap-3 text-black dark:text-white">
-    <li>
-      <a aria-label="Share on Twitter" href={`https://x.com/intent/post?text=${message + " " + URL}`}
-        ><TwitterColorIcon /></a
+    <li class={`flex items-center justify-center bg-black p-1 rounded-sm`}>
+      <a aria-label="Share on Twitter" href={`https://x.com/intent/post?text=${message + " " + URL}`} target="_blank"
+        ><XIcon color={"white"} size={24} /></a
       >
     </li>
     <li>
-      <a aria-label="Share on LinkedIn" href={`https://www.linkedin.com/shareArticle?mini=true&url=${URL}`}>
+      <a
+        aria-label="Share on LinkedIn"
+        href={`https://www.linkedin.com/shareArticle?mini=true&url=${URL}`}
+        target="_blank"
+      >
         <LinkedinIcon /></a
       >
     </li>
