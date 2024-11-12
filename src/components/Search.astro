@@ -7,7 +7,12 @@ import SearchBar from "astro-pagefind/components/Search";
 ---
 
 <site-search class="ms-auto" id="search">
-  <button class="flex items-center justify-center rounded-md gap-1" data-open-modal disabled>
+  <button
+    aria-label="Search - Magnifyin glass"
+    class="flex items-center justify-center rounded-md gap-1"
+    data-open-modal
+    disabled
+  >
     <SearchIcon size={24} />
     <!-- <span class='md:hidden text-2xl'> Search</span> -->
   </button>

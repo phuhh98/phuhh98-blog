@@ -11,8 +11,8 @@ I'm using Astro SSG and Dcap CMS for content management.
 First clone the repository to local and install dependencies
 
 ```bash
-git clone https://github.com/phuhh98/blog.git
-cd blog/
+git clone https://github.com/phuhh98/phuhh98.github.io.git
+cd phuhh98.github.io/
 npm ci
 ```
 
@@ -30,9 +30,9 @@ Then comment this section from dcap config at _public/admin/config.yml_ to enabl
 # Go live, uncomment this before push to github
 # backend:
 #   name: github
-#   repo: phuhh98/blog
+#   repo: phuhh98/phuhh98.github.io
 #   branch: main
-#   base_url: https://api.netlify.com
+#   base_url: https://netlify-cms-github-oauth-provider-o2ex.onrender.com
 
 # config for local development, comment this before push to github
 backend:
