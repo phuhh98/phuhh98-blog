@@ -21,6 +21,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: deployment
     env:
       PUBLIC_AUTHOR_EMAIL: ${{ vars.PUBLIC_AUTHOR_EMAIL }}
       PUBLIC_APP_BASE_URL: ${{ vars.PUBLIC_APP_BASE_URL }}
