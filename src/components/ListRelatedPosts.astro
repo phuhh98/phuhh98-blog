@@ -1,7 +1,8 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
-import { cn } from "@/utils";
+import { cld, cn } from "@/utils";
+import { Actions } from "@cloudinary/url-gen";
 import { Image } from "astro:assets";
 
 type Props = {
@@ -23,7 +24,10 @@ const { posts } = Astro.props;
                 class={cn("w-16 h-16 object-cover rounded-full")}
                 format="webp"
                 height={100}
-                src={post.data.heroImage}
+                src={cld
+                  .image(post.data.heroImage)
+                  .addAction(Actions.Resize.limitFill().width(100).height(100))
+                  .toURL()}
                 width={100}
               />
             </div>

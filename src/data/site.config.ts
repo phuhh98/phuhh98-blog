@@ -15,5 +15,5 @@ export const siteConfig: SiteConfig = {
   ogLocale: "vi_VN",
   paginationSize: 6, // Number of posts per page
   shareMessage: "Share this post", // Message to share a post on social media
-  title: "Lucas me",
+  title: "pH7",
 };
