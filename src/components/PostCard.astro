@@ -1,11 +1,27 @@
 ---
 import FormattedDate from "@/components/FormattedDate";
 import ArrowUp from "@/components/icons/ArrowUp";
+import { cld } from "@/utils";
+import { Actions } from "@cloudinary/url-gen";
 import { Image } from "astro:assets";
+interface Props {
+  data: {
+    category: string;
+    description: string;
+    heroImage: string;
+    pubDate: Date;
+    title: string;
+  };
+  id: string;
+  imageEagerLoad?: boolean;
+  readTime: string;
+  slug: string;
+}
 
 const {
   // id,
   data: { category, description, heroImage, pubDate, title },
+  imageEagerLoad = false,
   readTime,
   slug,
 } = Astro.props;
@@ -18,7 +34,8 @@ const {
       class="h-full min-w-full object-cover hover:scale-[101%] transition-all duration-200 rounded-[2px]"
       format="webp"
       height={200}
-      src={heroImage}
+      loading={imageEagerLoad ? "eager" : "lazy"}
+      src={cld.image(heroImage).addAction(Actions.Resize.limitFill().width(1200).height(400)).toURL()}
       width={600}
     />
 
@@ -75,7 +92,7 @@ const {
         ".effect",
         {
           clipPath: ["circle(0% at 0% 0%)", "circle(100% at 50% 50%)"],
-        opacity: [0, 1],
+          opacity: [0, 1],
         },
         { duration: 2, easing: "ease" },
       );

@@ -11,7 +11,7 @@ on:
   repository_dispatch:
     types:
       - webhook
-      
+
 # Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
@@ -42,5 +42,8 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         env:
+          PUBLIC_AUTHOR_EMAIL: ${{ vars.PUBLIC_AUTHOR_EMAIL }}
+          PUBLIC_APP_BASE_URL: ${{ vars.PUBLIC_APP_BASE_URL }}
           PUBLIC_GITHUB_PROFILE_URl: ${{ vars.PUBLIC_GITHUB_PROFILE_URl }}
           PUBLIC_X_PROFILE_URL: ${{ vars.PUBLIC_X_PROFILE_URL }}
+          PUBLIC_LINKEDIN_PROFILE_URL: ${{ vars.PUBLIC_LINKEDIN_PROFILE_URL }}

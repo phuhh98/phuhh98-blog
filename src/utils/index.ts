@@ -1,3 +1,4 @@
+export { cld } from "./cloudinary";
 export { cn } from "./cn";
 export { filterPostsByCategory, getCategories, getPostByTag, getPosts, getTags } from "./post";
 export { remarkReadingTime } from "./readTime";

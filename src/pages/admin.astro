@@ -14,11 +14,13 @@
   <body>
     <script>
       import CMS from "decap-cms-app";
+      import cloudinary from "decap-cms-media-library-cloudinary";
       // Initialize the CMS object
       CMS.init();
       // TODO: Reference to custom edit UI https://decapcms.org/docs/customization/
       // Now the registry is available via the CMS object.
       // CMS.registerPreviewTemplate("my-template", MyTemplate);
+      CMS.registerMediaLibrary(cloudinary);
     </script>
   </body>
 </html>

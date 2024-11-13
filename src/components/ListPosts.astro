@@ -10,6 +10,7 @@ type Props = {
 };
 
 const { FirstBig = false, posts } = Astro.props;
+const MAX_IMAGE_EAGER_LOAD = 2;
 ---
 
 <section
@@ -19,10 +20,18 @@ const { FirstBig = false, posts } = Astro.props;
   )}
 >
   {
-    posts.map(async (post) => {
+    posts.map(async (post, index) => {
       const { remarkPluginFrontmatter } = await post.render();
 
-      return <PostCard data={post.data} id={post.id} readTime={remarkPluginFrontmatter.minutesRead} slug={post.slug} />;
+      return (
+        <PostCard
+          data={post.data}
+          id={post.id}
+          imageEagerLoad={FirstBig && index < MAX_IMAGE_EAGER_LOAD ? true : false}
+          readTime={remarkPluginFrontmatter.minutesRead}
+          slug={post.slug}
+        />
+      );
     })
   }
 </section>
