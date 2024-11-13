@@ -16,8 +16,8 @@ backend:
 # # end local dev block
 
 publish_mode: editorial_workflow # https://decapcms.org/docs/editorial-workflows/
-media_folder: "src/assets/images" # Location where files will be stored in the repo
-public_folder: "src/assets/images" # The src attribute for uploaded media
+# media_folder: "src/assets/images" # Location where files will be stored in the repo
+# public_folder: "src/assets/images" # The src attribute for uploaded media
 
 # Ref https://decapcms.org/docs/cloudinary/
 media_library:
