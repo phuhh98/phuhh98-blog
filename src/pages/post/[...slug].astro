@@ -2,6 +2,7 @@
 import Giscus from "@/components/Giscus";
 import ListRelatedPosts from "@/components/ListRelatedPosts";
 import Code from "@/components/mdx/Code";
+import ImageMdx from "@/components/mdx/ImageMdx";
 import SButton from "@/components/mdx/SButton";
 import Share from "@/components/Share";
 import TableOfContents from "@/components/TableOfContents";
@@ -48,7 +49,7 @@ const { Content, headings, remarkPluginFrontmatter } = await post.render();
     <!-- post -->
     <article class="max-w-full w-full">
       <div class="prose prose-lg md:prose-xl dark:prose-invert mb-12 min-w-full">
-        <Content components={{ pre: Code, SButton }} data-pagefind-body />
+        <Content components={{ img: ImageMdx, pre: Code, SButton }} data-pagefind-body />
       </div>
 
       <!-- related posts -->

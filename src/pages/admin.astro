@@ -15,12 +15,16 @@
     <script>
       import CMS from "decap-cms-app";
       import cloudinary from "decap-cms-media-library-cloudinary";
+      import { BlogPreview } from "src/decap-preview/react/BlogPreview";
+
       // Initialize the CMS object
       CMS.init();
       // TODO: Reference to custom edit UI https://decapcms.org/docs/customization/
       // Now the registry is available via the CMS object.
       // CMS.registerPreviewTemplate("my-template", MyTemplate);
       CMS.registerMediaLibrary(cloudinary);
+      CMS.registerPreviewStyle("src/styles/global.css");
+      CMS.registerPreviewTemplate("blog", BlogPreview);
     </script>
   </body>
 </html>
