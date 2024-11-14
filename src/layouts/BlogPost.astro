@@ -69,10 +69,12 @@ const articleDate = pubDate.toISOString();
 
 <script>
   const fnObserver = () => {
-    function handleIntersection(
+    const activeTracker = new Set<Element>();
+
+    const handleIntersection: IntersectionObserverCallback = (
       entries: IntersectionObserverEntry[],
       // observer: IntersectionObserver
-    ) {
+    ) => {
       const normalPageIndexStateLight = ["text-stone-400", "hover:text-stone-900", "hover:font-bold"];
       const activePageIndexStyleLight = [
         "font-bold",
@@ -98,29 +100,65 @@ const articleDate = pubDate.toISOString();
         const index = document.querySelector(`aside a[href="#${entry.target.id}"]`);
 
         index?.classList.add(...normalPageIndexStateLight, ...normalPageIndexStateDark);
+
         if (entry.isIntersecting) {
-          index?.classList.remove("text-stone-400", "dark:text-stone-300");
-          index?.classList.add(...activePageIndexStyleLight, ...activePageIndexStyleDark);
-        } else {
-          index?.classList.remove(...activePageIndexStyleLight, ...activePageIndexStyleDark);
+          activeTracker.add(entry.target);
         }
+
+        if (!entry.isIntersecting) {
+          index?.classList.remove(...activePageIndexStyleLight, ...activePageIndexStyleDark);
+          activeTracker.delete(entry.target);
+        }
+
+        const activeIndex = document.querySelector(`aside a[href="#${Array.from(activeTracker)[0]?.id}"]`);
+
+        activeIndex?.classList.remove("text-stone-400", "dark:text-stone-300");
+        activeIndex?.classList.add(...activePageIndexStyleLight, ...activePageIndexStyleDark);
       });
-    }
+    };
 
     const headings = document.querySelectorAll(
       "div.prose h1, div.prose h2, div.prose h3, div.prose h4, div.prose h5, div.prose h6",
     );
 
-    const options = {
+    const options: IntersectionObserverInit = {
       root: null,
-      rootMargin: " 15% 0px 0% 0px ",
+      rootMargin: "15% 0px 0% 0px ",
       threshold: 1,
     };
 
+    /**
+     * Use Intersection observe api to watch change in viewport
+     * https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+     */
     const observer = new IntersectionObserver(handleIntersection, options);
 
     headings.forEach((heading) => {
+      // Set up observer for intersect api
       observer.observe(heading);
+
+      /**
+       * Set up smoth scroll with offset top on index clicks
+       */
+      const targetId = heading.getAttribute("id");
+      if (!targetId) {
+        return;
+      }
+
+      const index = document.querySelector(`aside a[href="#${targetId}"]`);
+      if (index) {
+        const OFFSET = 90; // in pixel
+        index.addEventListener("click", function (event) {
+          event.preventDefault();
+          const targetElement = heading as HTMLElement;
+          const targetPosition = targetElement.offsetTop - OFFSET;
+          window.scrollTo({ behavior: "smooth", top: targetPosition });
+
+          activeTracker.clear();
+          activeTracker.add(heading);
+          window.history.pushState(null, "", `#${targetId}`);
+        });
+      }
     });
   };
   fnObserver();

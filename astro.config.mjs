@@ -17,16 +17,15 @@ export default defineConfig({
     // mdx config inherit markdown config and apply only differences
     mdx({
       shikiConfig: {
-        themes: {
-          dark: "rose-pine-moon",
-          light: "rose-pine-dawn",
-        },
+        theme: "material-theme-ocean",
         wrap: true,
       },
-      syntaxHighlight: "shiki",
+      syntaxHighlight: "prism",
     }),
     sitemap(), // spotlightjs(),
-    react(),
+    react({
+      include: ["**/react/.(jsx|tsx)$/"],
+    }),
     tailwind(),
     icon(),
     pagefind(),
