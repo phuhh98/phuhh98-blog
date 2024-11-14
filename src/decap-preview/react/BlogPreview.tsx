@@ -29,7 +29,7 @@ export const BlogPreview: React.ComponentType<PreviewTemplateComponentProps> = (
           })}
         </time>
         <h1 className="text-center text-4xl md:text-6xl md:pb-2.5 font-semibold">{title}</h1>
-        <div className="m-auto flex flex-row gap-2 my-2 justify-center">
+        <div className="m-auto flex flex-row gap-2 my-4 justify-center">
           {tags.map((tag) => (
             <Tag key={tag} tag={tag} />
           ))}
@@ -45,16 +45,16 @@ export const BlogPreview: React.ComponentType<PreviewTemplateComponentProps> = (
         </div>
       </section>
 
-      <section className="my-2" title="description">
+      <section className="mx-auto my-4 prose prose-lg md:prose-xl" title="description">
         <hr />
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row gap-4 items-center">
           <aside className="font-bold">Description</aside>
 
           <p className="border-l-2">{description}</p>
         </div>
         <hr />
       </section>
-      <section className="text-left" title="body">
+      <section className="mx-auto text-left prose prose-lg md:prose-xl" title="body">
         <Markdown
           components={{
             code(props) {
