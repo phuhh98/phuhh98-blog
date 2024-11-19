@@ -21,7 +21,6 @@
     ]
   },
   "dependencies": {
-    "@cloudinary/url-gen": "^1.21.0",
     "@iconify-json/line-md": "^1.2.2",
     "@playform/compress": "^0.1.6",
     "astro": "^4.16.9",

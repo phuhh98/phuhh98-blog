@@ -1,8 +1,6 @@
 ---
 import FormattedDate from "@/components/FormattedDate";
 import ArrowUp from "@/components/icons/ArrowUp";
-import { cld } from "@/utils";
-import { Actions } from "@cloudinary/url-gen";
 import { Image } from "astro:assets";
 interface Props {
   data: {
@@ -35,7 +33,7 @@ const {
       format="webp"
       height={200}
       loading={imageEagerLoad ? "eager" : "lazy"}
-      src={cld.image(heroImage).addAction(Actions.Resize.limitFill().width(1200).height(400)).toURL()}
+      src={heroImage}
       width={600}
     />
 

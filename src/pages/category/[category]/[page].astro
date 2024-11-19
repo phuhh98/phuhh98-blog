@@ -35,6 +35,8 @@ const posts = page.data;
 <BaseLayout title={params.category}>
   <TitlePage title={unsluglifyNameCategory} />
   <ListCategories activeCategory={params.category} />
-  <ListPosts posts={posts} />
+  <div class="flex-grow">
+    <ListPosts posts={posts} />
+  </div>
   <Pagination page={page} />
 </BaseLayout>

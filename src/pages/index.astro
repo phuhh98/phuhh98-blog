@@ -14,7 +14,7 @@ const posts = await getPosts(MAX_POSTS);
   <TitlePage title={siteConfig.title} titleFirstLetterUppercase={false} />
   <ListCategories />
 
-  <div>
+  <div class="flex-grow">
     <h2 class="text-lg font-medium tracking-wide text-end">Latest Posts</h2>
     <ListPosts FirstBig={true} posts={posts} />
   </div>

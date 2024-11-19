@@ -4,13 +4,22 @@ const blog = defineCollection({
   // Type-check frontmatter using a schema
   schema: () =>
     z.object({
+      /**
+       * Cloudinary image url
+       */
+      cardImage: z.string().url(),
       category: z.string(),
       description: z.string(),
       draft: z.boolean().default(false),
       /**
-       * Cloudinary file name
+       * Cloudinary image url
        */
-      heroImage: z.string(),
+      heroImage: z.string().url(),
+      /**
+       * Cloudinary image url
+       */
+      peekImage: z.string().url(),
+
       // Transform string to Date object
       pubDate: z
         .string()

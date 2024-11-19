@@ -14,7 +14,9 @@ export interface Props {
 
 const { articleDate, description = siteConfig.description, ogImage, title } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialImageURL = new URL(ogImage, Astro.url).href;
+// const socialImageURL = new URL(ogImage, Astro.url).href;
+// The input image is already an url
+const socialImageURL = ogImage;
 
 const titleSeparator = "•";
 
