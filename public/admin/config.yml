@@ -22,7 +22,7 @@ publish_mode: editorial_workflow # https://decapcms.org/docs/editorial-workflows
 # Ref https://decapcms.org/docs/cloudinary/
 media_library:
   name: cloudinary
-  output_filename_only: true
+  output_filename_only: false
   config:
     cloud_name: dchinnmfc
     api_key: 693835254646836
@@ -51,6 +51,14 @@ collections:
 
       - label: Hero image
         name: heroImage
+        widget: image
+
+      - label: Card image
+        name: cardImage
+        widget: image
+
+      - label: Peek image
+        name: peekImage
         widget: image
 
       - label: Category

@@ -5,7 +5,6 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { materialOceanic as codeHightlightStyle } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkMdx from "remark-mdx";
 import Tag from "src/components/react/Tag";
-import { cld } from "src/utils/cloudinary";
 
 /**
  *  Refer to schema in src/content/config.ts>blog
@@ -15,7 +14,7 @@ export const BlogPreview: React.ComponentType<PreviewTemplateComponentProps> = (
   const pubDate = entry.getIn(entryDataPath`pubDate`) as string;
   const description = entry.getIn(entryDataPath`description`) as string;
   const tags = entry.getIn(entryDataPath`tags`) as string[];
-  const image = entry.getIn(entryDataPath`heroImage`) as string;
+  const heroImage = entry.getIn(entryDataPath`heroImage`) as string;
   const body = entry.getIn(entryDataPath`body`) as string;
 
   return (
@@ -35,13 +34,7 @@ export const BlogPreview: React.ComponentType<PreviewTemplateComponentProps> = (
           ))}
         </div>
         <div className="flex justify-center">
-          <img
-            alt={"heroImage"}
-            className="md:w-600 md:h-300"
-            height={300}
-            src={cld.image(image).toURL()}
-            width={600}
-          />
+          <img alt={"heroImage"} className="md:w-600 md:h-300" height={300} src={heroImage} width={600} />
         </div>
       </section>
 
@@ -75,7 +68,7 @@ export const BlogPreview: React.ComponentType<PreviewTemplateComponentProps> = (
               );
             },
             img(props) {
-              return <img {...props} src={cld.image(props.src).toURL()} />;
+              return <img {...props} src={props.src} />;
             },
           }}
           remarkPlugins={[remarkMdx]}

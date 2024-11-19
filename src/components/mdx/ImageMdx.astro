@@ -1,5 +1,4 @@
 ---
-import { cld } from "@/utils";
 import { Image } from "astro:assets";
 
 // eslint-disable-next-line
@@ -9,5 +8,5 @@ const props = Astro.props;
 ---
 
 <div class="flex flex-row justify-center">
-  <Image alt={props.alt} height={600} src={cld.image(props.src).toURL()} width={800} />
+  <Image alt={props.alt} height={600} src={props.src} width={800} />
 </div>

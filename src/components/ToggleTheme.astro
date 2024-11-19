@@ -11,18 +11,18 @@ import SunIcon from "@/components/icons/SunIcon";
     "#sun-expand",
     {
       display: ["none", "block", "none"],
-      opacity: [0, 100, 0],
-      transform: ["rotate(0deg) scale(1)", "rotate(720deg) scale(10)", "rotate(360deg) scale(100)"],
+      opacity: [0, 10, 0],
+      transform: ["rotate(0deg) scale(1)", "rotate(720deg) scale(200)", "rotate(360deg) scale(600)"],
     },
-    { autoplay: false, duration: ICON_ANIMATION_DURATION_SECOND * 2 },
+    { autoplay: false, duration: ICON_ANIMATION_DURATION_SECOND * 3 },
   );
 
   const sunCollapsedAnimation = animate(
     "#sun-collapse",
     {
       display: ["none", "block", "none"],
-      opacity: [0, 100, 0],
-      transform: ["rotate(360deg) scale(100)", "rotate(720deg) scale(10)", "rotate(0deg) scale(1)"],
+      opacity: [0, 10, 0],
+      transform: ["rotate(360deg) scale(700)", "rotate(720deg) scale(400)", "rotate(0deg) scale(1)"],
     },
     { autoplay: false, duration: ICON_ANIMATION_DURATION_SECOND * 2 },
   );
