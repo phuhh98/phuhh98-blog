@@ -4,10 +4,10 @@ import ListPosts from "@/components/ListPosts";
 import TitlePage from "@/components/TitlePage";
 import { siteConfig } from "@/data/site.config";
 import BaseLayout from "@/layouts/BaseLayout";
-import { getPosts } from "@/utils";
+import { ContentRetriever } from "@/utils";
 
 const MAX_POSTS = 100; // max number of posts to show on the home page
-const posts = await getPosts(MAX_POSTS);
+const posts = await ContentRetriever.getPosts(MAX_POSTS);
 ---
 
 <BaseLayout title="Home">
@@ -16,7 +16,7 @@ const posts = await getPosts(MAX_POSTS);
 
   <div class="flex-grow">
     <h2 class="text-lg font-medium tracking-wide text-end">Latest Posts</h2>
-    <ListPosts FirstBig={true} posts={posts} />
+    <ListPosts FirstBig={true} posts={posts.items} />
   </div>
 </BaseLayout>
 

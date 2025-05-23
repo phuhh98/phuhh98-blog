@@ -2,14 +2,14 @@
 import ListPosts from "@/components/ListPosts";
 import TitlePage from "@/components/TitlePage";
 import BaseLayout from "@/layouts/BaseLayout";
-import { getPostByTag, getTags } from "@/utils";
+import { ContentRetriever } from "@/utils";
 
 export async function getStaticPaths() {
-  const tags = await getTags();
+  const tags = await ContentRetriever.getTags();
 
-  return tags.map((tag) => ({
-    params: { tag },
-    props: { tag },
+  return tags.items.map((tag) => ({
+    params: { tag: tag.fields.title },
+    props: { tag: tag.fields.title },
   }));
 }
 
@@ -19,7 +19,7 @@ type Props = {
 
 const { tag } = Astro.props;
 
-const posts = await getPostByTag(tag);
+const posts = await ContentRetriever.getPostByTag(tag);
 ---
 
 <BaseLayout title={tag}>

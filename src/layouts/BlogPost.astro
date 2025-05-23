@@ -1,21 +1,25 @@
 ---
-import type { MarkdownHeading } from "astro";
-import type { CollectionEntry } from "astro:content";
+// import type { MarkdownHeading } from "astro";
+import type { Entry } from "contentful";
 
 import FormattedDate from "@/components/FormattedDate";
 import Tag from "@/components/Tag";
 import BaseLayout from "@/layouts/BaseLayout";
 import { Image } from "astro:assets";
 
+import type { Blog } from "../types/contentful";
+
 type Props = {
-  data: CollectionEntry<"blog">["data"];
-  headings: MarkdownHeading[];
-  id: CollectionEntry<"blog">["id"];
-  readTime: string;
+  // headings: MarkdownHeading[];
+  id: string;
+  post: Entry<Blog, undefined, string>;
+  // readTime: string;
 };
 
-const { data, readTime /*headings, id*/ } = Astro.props;
-const { cardImage, description, heroImage, pubDate, tags, title } = data;
+const { post /* readTime /*headings, id*/ } = Astro.props;
+// const { cardImage, description, heroImage, pubDate, tags, title } = data;
+const { cardImage, description, heroImage, tags, title } = post.fields;
+const pubDate = new Date(post.sys.createdAt);
 
 const articleDate = pubDate.toISOString();
 ---
@@ -28,9 +32,9 @@ const articleDate = pubDate.toISOString();
           <p class="text-center text-sm text-opacity-50">
             Published <FormattedDate date={pubDate} />
           </p>
-          <p class="text-center text-sm text-opacity-50 font-bold">
+          <!-- <p class="text-center text-sm text-opacity-50 font-bold">
             - {readTime}
-          </p>
+          </p> -->
         </div>
         <h1 class="text-center text-4xl md:text-6xl md:pb-2.5 font-semibold">
           {title}
@@ -38,7 +42,7 @@ const articleDate = pubDate.toISOString();
       </div>
 
       <div class="flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5">
-        {tags.map((tag) => <Tag tag={tag} />)}
+        {tags.map((tag) => <Tag tag={"fields" in tag ? tag.fields.title : ""} />)}
       </div>
     </header>
 
@@ -51,7 +55,7 @@ const articleDate = pubDate.toISOString();
           height={500}
           loading="eager"
           quality={100}
-          src={heroImage}
+          src={"fields" in heroImage ? (heroImage.fields.file?.url as string) : ""}
           width={1000}
         />
       )
@@ -67,97 +71,81 @@ const articleDate = pubDate.toISOString();
 
 <script>
   const fnObserver = () => {
-    const activeTracker = new Set<Element>();
-
-    const handleIntersection: IntersectionObserverCallback = (
-      entries: IntersectionObserverEntry[],
-      // observer: IntersectionObserver
-    ) => {
-      const normalPageIndexStateLight = ["text-stone-400", "hover:text-stone-900", "hover:font-bold"];
-      const activePageIndexStyleLight = [
-        "font-bold",
-        "text-stone-900",
-        "bg-gradient-to-r",
-        "from-orange-400",
-        "to-orange-200",
-        "shadow-[3px_1px_0px_1px_rgba(251,146,60,0.6)]",
-      ];
-
-      const normalPageIndexStateDark = ["dark:text-stone-300", "dark:hover:text-stone-100", "dark:hover:font-bold"];
-
-      const activePageIndexStyleDark = [
-        "font-bold",
-        "dark:text-stone-100",
-        "dark:bg-gradient-to-r",
-        "dark:from-emerald-600",
-        "dark:to-emerald-400",
-        "dark:shadow-[3px_1px_0px_1px_rgba(167,243,208,0.3)]",
-      ];
-
-      entries.forEach((entry) => {
-        const index = document.querySelector(`aside a[href="#${entry.target.id}"]`);
-
-        index?.classList.add(...normalPageIndexStateLight, ...normalPageIndexStateDark);
-
-        if (entry.isIntersecting) {
-          activeTracker.add(entry.target);
-        }
-
-        if (!entry.isIntersecting) {
-          index?.classList.remove(...activePageIndexStyleLight, ...activePageIndexStyleDark);
-          activeTracker.delete(entry.target);
-        }
-
-        const activeIndex = document.querySelector(`aside a[href="#${Array.from(activeTracker)[0]?.id}"]`);
-
-        activeIndex?.classList.remove("text-stone-400", "dark:text-stone-300");
-        activeIndex?.classList.add(...activePageIndexStyleLight, ...activePageIndexStyleDark);
-      });
-    };
-
-    const headings = document.querySelectorAll(
-      "div.prose h1, div.prose h2, div.prose h3, div.prose h4, div.prose h5, div.prose h6",
-    );
-
-    const options: IntersectionObserverInit = {
-      root: null,
-      rootMargin: "15% 0px 0% 0px ",
-      threshold: 1,
-    };
-
+    // const activeTracker = new Set<Element>();s
+    // const handleIntersection: IntersectionObserverCallback = (
+    //   entries: IntersectionObserverEntry[],
+    //   // observer: IntersectionObserver
+    // ) => {
+    //   const normalPageIndexStateLight = ["text-stone-400", "hover:text-stone-900", "hover:font-bold"];
+    //   const activePageIndexStyleLight = [
+    //     "font-bold",
+    //     "text-stone-900",
+    //     "bg-gradient-to-r",
+    //     "from-orange-400",
+    //     "to-orange-200",
+    //     "shadow-[3px_1px_0px_1px_rgba(251,146,60,0.6)]",
+    //   ];
+    //   const normalPageIndexStateDark = ["dark:text-stone-300", "dark:hover:text-stone-100", "dark:hover:font-bold"];
+    //   const activePageIndexStyleDark = [
+    //     "font-bold",
+    //     "dark:text-stone-100",
+    //     "dark:bg-gradient-to-r",
+    //     "dark:from-emerald-600",
+    //     "dark:to-emerald-400",
+    //     "dark:shadow-[3px_1px_0px_1px_rgba(167,243,208,0.3)]",
+    //   ];
+    //   entries.forEach((entry) => {
+    //     const index = document.querySelector(`aside a[href="#${entry.target.id}"]`);
+    //     index?.classList.add(...normalPageIndexStateLight, ...normalPageIndexStateDark);
+    //     if (entry.isIntersecting) {
+    //       activeTracker.add(entry.target);
+    //     }
+    //     if (!entry.isIntersecting) {
+    //       index?.classList.remove(...activePageIndexStyleLight, ...activePageIndexStyleDark);
+    //       activeTracker.delete(entry.target);
+    //     }
+    //     const activeIndex = document.querySelector(`aside a[href="#${Array.from(activeTracker)[0]?.id}"]`);
+    //     activeIndex?.classList.remove("text-stone-400", "dark:text-stone-300");
+    //     activeIndex?.classList.add(...activePageIndexStyleLight, ...activePageIndexStyleDark);
+    //   });
+    // };
+    // const headings = document.querySelectorAll(
+    //   "div.prose h1, div.prose h2, div.prose h3, div.prose h4, div.prose h5, div.prose h6",
+    // );
+    // const options: IntersectionObserverInit = {
+    //   root: null,
+    //   rootMargin: "15% 0px 0% 0px ",
+    //   threshold: 1,
+    // };
     /**
      * Use Intersection observe api to watch change in viewport
      * https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
      */
-    const observer = new IntersectionObserver(handleIntersection, options);
-
-    headings.forEach((heading) => {
-      // Set up observer for intersect api
-      observer.observe(heading);
-
-      /**
-       * Set up smoth scroll with offset top on index clicks
-       */
-      const targetId = heading.getAttribute("id");
-      if (!targetId) {
-        return;
-      }
-
-      const index = document.querySelector(`aside a[href="#${targetId}"]`);
-      if (index) {
-        const OFFSET = 90; // in pixel
-        index.addEventListener("click", function (event) {
-          event.preventDefault();
-          const targetElement = heading as HTMLElement;
-          const targetPosition = targetElement.offsetTop - OFFSET;
-          window.scrollTo({ behavior: "smooth", top: targetPosition });
-
-          activeTracker.clear();
-          activeTracker.add(heading);
-          window.history.pushState(null, "", `#${targetId}`);
-        });
-      }
-    });
+    // const observer = new IntersectionObserver(handleIntersection, options);
+    // headings.forEach((heading) => {
+    //   // Set up observer for intersect api
+    //   observer.observe(heading);
+    //   /**
+    //    * Set up smoth scroll with offset top on index clicks
+    //    */
+    //   const targetId = heading.getAttribute("id");
+    //   if (!targetId) {
+    //     return;
+    //   }
+    //   const index = document.querySelector(`aside a[href="#${targetId}"]`);
+    //   if (index) {
+    //     const OFFSET = 90; // in pixel
+    //     index.addEventListener("click", function (event) {
+    //       event.preventDefault();
+    //       const targetElement = heading as HTMLElement;
+    //       const targetPosition = targetElement.offsetTop - OFFSET;
+    //       window.scrollTo({ behavior: "smooth", top: targetPosition });
+    //       activeTracker.clear();
+    //       activeTracker.add(heading);
+    //       window.history.pushState(null, "", `#${targetId}`);
+    //     });
+    //   }
+    // });
   };
   fnObserver();
   document.addEventListener("astro:after-swap", fnObserver);

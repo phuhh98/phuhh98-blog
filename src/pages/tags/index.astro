@@ -2,13 +2,13 @@
 import Tag from "@/components/Tag";
 import TitlePage from "@/components/TitlePage";
 import BaseLayout from "@/layouts/BaseLayout";
-import { getTags } from "@/utils";
-const tags = await getTags();
+import { ContentRetriever } from "@/utils";
+const tags = await ContentRetriever.getTags();
 ---
 
 <BaseLayout title="Tags">
   <TitlePage title="Tags" />
   <div class="flex-grow flex justify-center flex-wrap gap-4">
-    {tags.map((tag) => <Tag tag={tag} />)}
+    {tags.items.map((tag) => <Tag tag={tag.fields.title} />)}
   </div>
 </BaseLayout>

@@ -1,11 +1,11 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import type { BlogEntry } from "@/types/contentful";
 
 import { cn } from "@/utils";
 import { Image } from "astro:assets";
 
 type Props = {
-  posts: CollectionEntry<"blog">[];
+  posts: BlogEntry[];
 };
 
 const { posts } = Astro.props;
@@ -19,27 +19,36 @@ const { posts } = Astro.props;
           <div class={cn("flex flex-row gap-1 w-[14rem]")}>
             <div class={cn("min-h-full")}>
               <Image
-                alt={`img of ${post.data.title}`}
+                alt={`img of ${post.fields.title}`}
                 class={cn("w-16 h-16 object-cover rounded-full")}
                 format="webp"
                 height={100}
-                src={post.data.peekImage}
+                src={(() => {
+                  let peekImage = post.fields.peekImage;
+                  if ("fields" in peekImage) {
+                    return peekImage.fields.file?.url as string;
+                  }
+                  return "";
+                })()}
                 width={100}
               />
             </div>
             <header class={cn("flex flex-col justify-center items-start gap-0 min-w-[50%]")}>
               <div>
-                <a class="font-medium hover:underline" href={`/post/${post.slug}/`}>
-                  {post.data.title}
+                <a class="font-medium hover:underline" href={`/post/${post.fields.slug}/`}>
+                  {post.fields.title}
                 </a>
               </div>
 
               <div class="flex flex-wrap">
-                {post.data.tags.map((tag) => (
-                  <span class="text-xxs text-gray-600 hover:underline">
-                    <a href={`/tags/${encodeURIComponent(tag)}`}>#{tag}</a>&nbsp;
-                  </span>
-                ))}
+                {post.fields.tags.map((tag) => {
+                  const tagString = "fields" in tag ? tag.fields.title : "";
+                  return (
+                    <span class="text-xxs text-gray-600 hover:underline">
+                      <a href={`/tags/${encodeURIComponent(tagString)}`}>#{tagString}</a>&nbsp;
+                    </span>
+                  );
+                })}
               </div>
             </header>
           </div>

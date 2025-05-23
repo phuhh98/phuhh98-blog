@@ -13,6 +13,9 @@ import { remarkReadingTime } from "./src/utils/readTime.ts";
 // https://astro.build/config
 export default defineConfig({
   base: "",
+  build: {
+    format: "file",
+  },
   integrations: [
     // mdx config inherit markdown config and apply only differences
     mdx({
@@ -23,9 +26,7 @@ export default defineConfig({
       syntaxHighlight: "prism",
     }),
     sitemap(), // spotlightjs(),
-    react({
-      include: ["**/react/.(jsx|tsx)$/"],
-    }),
+    react(),
     tailwind(),
     icon(),
     pagefind(),
@@ -37,6 +38,7 @@ export default defineConfig({
     remarkPlugins: [remarkReadingTime],
     shikiConfig: {},
   },
+  output: "static",
 
   site: "https://phuhh98.github.io",
 });

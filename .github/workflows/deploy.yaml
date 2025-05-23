@@ -28,7 +28,7 @@ jobs:
       PUBLIC_GITHUB_PROFILE_URL: ${{ vars.PUBLIC_GITHUB_PROFILE_URl }}
       PUBLIC_X_PROFILE_URL: ${{ vars.PUBLIC_X_PROFILE_URL }}
       PUBLIC_LINKEDIN_PROFILE_URL: ${{ vars.PUBLIC_LINKEDIN_PROFILE_URL }}
-      PUBLIC_CLOUDINARY_NAME: ${{ vars.PUBLIC_CLOUDINARY_NAME }}
+      # PUBLIC_CLOUDINARY_NAME: ${{ vars.PUBLIC_CLOUDINARY_NAME }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4

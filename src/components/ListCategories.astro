@@ -1,14 +1,16 @@
 ---
 import Category from "@/components/Category";
-import { getCategories } from "@/utils";
-const categories = await getCategories();
+
+import { ContentRetriever } from "../utils";
+// import { getCategories } from "@/utils";
+const categories = await ContentRetriever.getCategories();
 
 const { activeCategory } = Astro.props;
 ---
 
 <div class="relative flex flex-wrap min-w-full gap-5">
   <Category />
-  {categories.map((category: string) => <Category activeCategory={activeCategory} name={category} />)}
+  {categories.items.map((category) => <Category activeCategory={activeCategory} name={category.fields.title} />)}
 
   <div class="hidden sm:block absolute w-full bottom-0 border-b-2 -z-40 dark:border-gray-600"></div>
 </div>

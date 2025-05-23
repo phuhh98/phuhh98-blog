@@ -11,6 +11,11 @@ export default tseslint.config(
   // Ref: https://typescript-eslint.io/getting-started/#step-2-configuration
   eslint.configs.recommended,
   ...tseslint.configs.strict,
+  {
+    rules: {
+      "@typescript-eslint/no-extraneous-class": "warn",
+    },
+  },
   // Ref: https://ota-meshi.github.io/eslint-plugin-astro/user-guide/#-usage
   ...eslintPluginAstro.configs.recommended,
   // Ref https://perfectionist.dev/configs/recommended-natural

@@ -1,12 +1,12 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import type { BlogEntry } from "@/types/contentful";
 
 import PostCard from "@/components/PostCard";
 import { cn } from "@/utils";
 
 type Props = {
   FirstBig?: boolean;
-  posts: CollectionEntry<"blog">[];
+  posts: BlogEntry[];
 };
 
 const { FirstBig = false, posts } = Astro.props;
@@ -18,15 +18,24 @@ const MAX_IMAGE_EAGER_LOAD = 2;
 >
   {
     posts.map(async (post, index) => {
-      const { remarkPluginFrontmatter } = await post.render();
+      // const { remarkPluginFrontmatter } = await post.fields.content.render();
 
       return (
         <PostCard
-          data={post.data}
-          id={post.id}
+          data={{
+            category: "fields" in post.fields.category ? post.fields.category.fields.title : "",
+            description: post.fields.description,
+            heroImage:
+              "fields" in post.fields.heroImage && post.fields.heroImage.fields.file?.url
+                ? post.fields.heroImage.fields.file?.url
+                : "",
+            pubDate: new Date(post.sys.createdAt), // Use sys.createdAt for the first published date
+            title: post.fields.title,
+          }}
+          id={post.sys.id}
           imageEagerLoad={FirstBig && index < MAX_IMAGE_EAGER_LOAD ? true : false}
-          readTime={remarkPluginFrontmatter.minutesRead}
-          slug={post.slug}
+          readTime="place holder"
+          slug={post.fields.slug}
         />
       );
     })

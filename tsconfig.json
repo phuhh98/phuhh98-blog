@@ -8,8 +8,11 @@
     "verbatimModuleSyntax": true,
     "paths": {
       "@/components/*": ["src/components/*.astro"],
+      "@/components/react/*": ["src/components/react/*.tsx"],
+      "@/types/*": ["src/types/*"],
       "@/layouts/*": ["src/layouts/*.astro"],
       "@/utils": ["src/utils/index.ts"],
+      // "@/utils/*": ["src/utils/*.ts"],
       "@/data/*": ["src/data/*"],
       "@/site-config": ["src/data/site.config.ts"],
       "@/styles": ["src/styles/"],
