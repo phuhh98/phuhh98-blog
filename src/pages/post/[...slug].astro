@@ -12,6 +12,8 @@ import Share from "@/components/Share";
 import BlogPost from "@/layouts/BlogPost";
 import { ContentRetriever } from "@/utils";
 
+import { contentfulDocumentReadtime } from "../../utils/readTime";
+
 const posts = await ContentRetriever.getPosts();
 export async function getStaticPaths() {
   const posts = await ContentRetriever.getPosts();
@@ -26,11 +28,15 @@ type Props = BlogEntry;
 const post = Astro.props;
 const MAX_POSTS = 3;
 const getRelatedPosts = (post: Props) => {
-  const lowercaseTags = post.fields.tags.map((tag) => "fields" in tag && tag.fields.title.toLowerCase());
+  const lowercaseTags = post.fields.tags.map(
+    (tag) => "fields" in tag && tag.fields.title.toLowerCase(),
+  );
   const relatedPosts = posts.items.filter(
     (p) =>
       p.fields.slug !== post.fields.slug &&
-      p.fields.tags.some((t) => "fields" in t && lowercaseTags.includes(t.fields.title.toLowerCase())),
+      p.fields.tags.some(
+        (t) => "fields" in t && lowercaseTags.includes(t.fields.title.toLowerCase()),
+      ),
   );
   return relatedPosts.slice(0, MAX_POSTS);
 };
@@ -38,6 +44,7 @@ const getRelatedPosts = (post: Props) => {
 const relatedPosts = getRelatedPosts(post);
 
 // const { Content, headings, remarkPluginFrontmatter } = await post.render();
+const readTime = await contentfulDocumentReadtime(post.fields.content);
 ---
 
 <!-- <BlogPost 
@@ -46,7 +53,7 @@ post={post}
 id={post.sys.id}
  readTime={remarkPluginFrontmatter.minutesRead}
  /> -->
-<BlogPost id={post.sys.id} post={post} />
+<BlogPost id={post.sys.id} post={post} readTime={readTime} />
 <div class="grid grid-cols-1 md:grid-cols-[20%_auto] gap-10 mt-8">
   <aside class="md:flex flex-col gap-8">
     <Share />

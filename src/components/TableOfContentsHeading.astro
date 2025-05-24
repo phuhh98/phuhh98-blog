@@ -16,7 +16,9 @@ export interface Props {
 
 <li class="flex flex-col">
   <a
-    class={cn(`py-1 px-4 mb-2 first-letter:uppercase w-fit line-clamp-2 text-stone-400 dark:text-stone-300`)}
+    class={cn(
+      `py-1 px-4 mb-2 first-letter:uppercase w-fit line-clamp-2 text-stone-400 dark:text-stone-300`,
+    )}
     href={"#" + heading.slug}
   >
     {heading.text}

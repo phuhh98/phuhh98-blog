@@ -17,7 +17,11 @@ export async function getStaticPaths({ paginate }: any) {
     const unsluglifyNameCategory = unsluglify(category.fields.title!.toLowerCase());
     const filteredPosts = allPosts.items.filter((post) => {
       const category = post.fields.category;
-      return category && "fields" in category && category.fields.title.toLowerCase() === unsluglifyNameCategory;
+      return (
+        category &&
+        "fields" in category &&
+        category.fields.title.toLowerCase() === unsluglifyNameCategory
+      );
     });
 
     return paginate(filteredPosts, {

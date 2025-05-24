@@ -8,8 +8,6 @@ import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
 
-import { remarkReadingTime } from "./src/utils/readTime.ts";
-
 // https://astro.build/config
 export default defineConfig({
   base: "",
@@ -35,7 +33,6 @@ export default defineConfig({
   // Markdown reference https://docs.astro.build/en/reference/configuration-reference/#markdown-options
   markdown: {
     drafts: true,
-    remarkPlugins: [remarkReadingTime],
     shikiConfig: {},
   },
   output: "static",

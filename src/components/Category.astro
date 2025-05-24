@@ -6,7 +6,8 @@ const currentPath = Astro.url.pathname;
 const unsluglifyNameCategory = sluglify(name.toLowerCase());
 
 const isActive =
-  activeCategory?.toLocaleLowerCase() === unsluglifyNameCategory || (currentPath === "/" && name === "View All");
+  activeCategory?.toLocaleLowerCase() === unsluglifyNameCategory ||
+  (currentPath === "/" && name === "View All");
 ---
 
 <a

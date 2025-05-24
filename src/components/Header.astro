@@ -38,8 +38,12 @@ const SOCIALNETWORKS = [
     class="shadow rounded-l-lg md:bg-transparent dark:md:bg-transparent bg-white dark:bg-[#0a0910] md:shadow-none md:rounded-none md:border-none md:h-auto md:static absolute transition-transform duration-300 ease-in translate-x-96 md:translate-x-0 top-12 -right-5 pl-4 pt-6 pb-4 md:p-0 h-[200px] w-[200px] z-50"
     id="astro-header-drawer"
   >
-    <nav class="flex h-full flex-col justify-between gap-12 text-left md:flex-row md:w-full md:gap-5">
-      <div class="flex flex-col gap-4 md:flex-row md:border-r-2 border-black pr-4 dark:border-white">
+    <nav
+      class="flex h-full flex-col justify-between gap-12 text-left md:flex-row md:w-full md:gap-5"
+    >
+      <div
+        class="flex flex-col gap-4 md:flex-row md:border-r-2 border-black pr-4 dark:border-white"
+      >
         <HeaderLink class="flex items-center gap-1 text-2xl md:text-base" href="/tags">
           <TagIcon /> Tags
         </HeaderLink>
@@ -49,7 +53,7 @@ const SOCIALNETWORKS = [
         {
           SOCIALNETWORKS.map((network) => (
             <HeaderLink aria-label={network.name} class="" href={network.url} target="_blank">
-              <IconHoverAlternate client:load="react">
+              <IconHoverAlternate client:load>
                 <network.icon size={24} slot="base" />
                 <network.animatedIcon size={24} slot="alternate" />
               </IconHoverAlternate>
@@ -76,7 +80,8 @@ const SOCIALNETWORKS = [
     const menu = document.getElementById("astro-header-drawer");
     const menuButton = document.getElementById("astro-header-drawer-button");
     const isClickInside =
-      menu?.contains(event.target as HTMLDivElement) || menuButton?.contains(event.target as HTMLButtonElement);
+      menu?.contains(event.target as HTMLDivElement) ||
+      menuButton?.contains(event.target as HTMLButtonElement);
 
     if (isClickInside) {
       menu?.classList.toggle("translate-x-96");

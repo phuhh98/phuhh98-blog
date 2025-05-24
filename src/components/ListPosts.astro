@@ -14,7 +14,10 @@ const MAX_IMAGE_EAGER_LOAD = 2;
 ---
 
 <section
-  class={cn(`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-3`, FirstBig && `md:[&>*:first-child]:col-span-2`)}
+  class={cn(
+    `grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-3`,
+    FirstBig && `md:[&>*:first-child]:col-span-2`,
+  )}
 >
   {
     posts.map(async (post, index) => {

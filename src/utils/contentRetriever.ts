@@ -57,7 +57,9 @@ export class ContentRetriever {
       });
       this.postsCache = response;
     }
-    return max ? { ...this.postsCache, items: this.postsCache.items.slice(0, max) } : this.postsCache;
+    return max
+      ? { ...this.postsCache, items: this.postsCache.items.slice(0, max) }
+      : this.postsCache;
   }
 
   static async getTags() {

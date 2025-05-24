@@ -1,11 +1,18 @@
 ---
 import BaseHead from "@/components/BaseHead";
-import EditBlog from "@/components/editBlog";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ProviderAnimations from "@/components/ProviderAnimations";
 import ProviderTheme from "@/components/ProviderTheme";
 import TwSizeIndicator from "@/components/TwSizeIndicator";
+
+type Props = {
+  articleDate?: string;
+  description?: string;
+  image?: string;
+  title: string;
+};
+
 const { articleDate, description, image, title } = Astro.props;
 ---
 
@@ -24,7 +31,12 @@ const { articleDate, description, image, title } = Astro.props;
       gtag("config", "G-5CCVVY2JB9");
     </script>
 
-    <BaseHead articleDate={articleDate} description={description} ogImage={image} title={title} />
+    <BaseHead
+      articleDate={articleDate}
+      description={description}
+      ogImage={image ?? ""}
+      title={title}
+    />
     <ProviderTheme />
     <ProviderAnimations />
   </head>
@@ -38,7 +50,6 @@ const { articleDate, description, image, title } = Astro.props;
       <Footer />
     </main>
     <TwSizeIndicator />
-    <EditBlog />
     <style>
       body {
         margin-left: calc(100vw - 100%); /* prevent layout shift */

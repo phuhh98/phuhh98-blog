@@ -22,6 +22,7 @@
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^17.0.0",
     "@contentful/rich-text-react-renderer": "^16.0.1",
+    "@contentful/rich-text-types": "^17.0.0",
     "@iconify-json/line-md": "^1.2.2",
     "@playform/compress": "^0.1.6",
     "astro": "^4.16.9",
@@ -29,11 +30,15 @@
     "astro-icon": "^1.1.2",
     "astro-pagefind": "^1.6.0",
     "contentful": "^11.5.23",
+    "hast-util-from-html": "^2.0.3",
+    "hast-util-to-string": "^3.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
     "react-syntax-highlighter": "^15.6.1",
+    "remark": "^15.0.1",
     "remark-mdx": "^3.1.0",
+    "remark-rehype": "^11.1.2",
     "sass": "^1.80.6",
     "tailwindcss": "^3.4.14"
   },
