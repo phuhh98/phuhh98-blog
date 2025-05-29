@@ -7,16 +7,17 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint --fix",
-    "format:write": "prettier . --write",
+    "lint:fix": "eslint --fix",
+    "lint:check": "eslint",
+    "format:fix": "prettier . --write",
     "format:check": "prettier . --check",
     "prepare": "husky",
     "decap:server": "decap-server"
   },
   "lint-staged": {
     "**/*": [
-      "prettier --write --ignore-unknown",
-      "eslint --fix"
+      "prettier --check --ignore-unknown",
+      "eslint"
     ]
   },
   "dependencies": {

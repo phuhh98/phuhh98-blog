@@ -2,23 +2,14 @@ import { defineCollection, z } from "astro:content";
 
 const blog = defineCollection({
   // Type-check frontmatter using a schema
-  schema: () =>
+  schema: ({ image }) =>
     z.object({
-      /**
-       * Cloudinary image url
-       */
-      cardImage: z.string().url(),
+      cardImage: image(),
       category: z.string(),
       description: z.string(),
       draft: z.boolean().default(false),
-      /**
-       * Cloudinary image url
-       */
-      heroImage: z.string().url(),
-      /**
-       * Cloudinary image url
-       */
-      peekImage: z.string().url(),
+      heroImage: image(),
+      peekImage: image(),
 
       // Transform string to Date object
       pubDate: z

@@ -28,7 +28,7 @@ const {
 <article
   class="grid grid-rows-[300px_auto] md:grid-rows-[300px_220px] min-h-full group"
 >
-  <a class="relative overflow-hidden" href={`/post/${slug}/`}>
+  <a class="relative overflow-hidden select-none" href={`/post/${slug}/`}>
     <Image
       alt={`img of ${title}`}
       class="h-full min-w-full object-cover hover:scale-[101%] transition-all duration-200 rounded-[2px]"
@@ -72,7 +72,7 @@ const {
       </p>
     </div>
 
-    <footer class="flex justify-between items-center">
+    <footer class="flex justify-between items-center select-none">
       <a
         aria-label={`go to ${title}`}
         class="flex justify-center items-center dark:text-white rounded-full hover:translate-x-1 transition-transform duration-150 ease-in-out font-semibold gap-1 group"
