@@ -1,0 +1,30 @@
+name: Check Development Branches for PRs
+
+on:
+  pull_request:
+    types:
+      - opened
+  workflow_dispatch:
+  # Allows external webhook trigger
+
+# Allow this job to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: deployment
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
