@@ -37,4 +37,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call webhook
-        run: curl -X POST ${{ vars.WEBHOOK_URL }}
+        run: curl -X POST ${{ vars.NETLIFY_WEBHOOK_URL }}
