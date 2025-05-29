@@ -27,7 +27,9 @@ const MAX_IMAGE_EAGER_LOAD = 2;
         <PostCard
           data={post.data}
           id={post.id}
-          imageEagerLoad={FirstBig && index < MAX_IMAGE_EAGER_LOAD ? true : false}
+          imageEagerLoad={
+            FirstBig && index < MAX_IMAGE_EAGER_LOAD ? true : false
+          }
           readTime={remarkPluginFrontmatter.minutesRead}
           slug={post.slug}
         />

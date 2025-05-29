@@ -27,7 +27,11 @@ import SearchBar from "astro-pagefind/components/Search";
       >
 
       <div class="search-container dark:text-white">
-        <SearchBar className="pagefind-ui" id="search" uiOptions={{ showImages: true, showSubResults: true }} />
+        <SearchBar
+          className="pagefind-ui"
+          id="search"
+          uiOptions={{ showImages: true, showSubResults: true }}
+        />
       </div>
     </div>
   </dialog>
@@ -40,9 +44,13 @@ import SearchBar from "astro-pagefind/components/Search";
     constructor() {
       super();
       // eslint-disable-next-line
-      const openBtn = this.querySelector<HTMLButtonElement>("button[data-open-modal]")!;
+      const openBtn = this.querySelector<HTMLButtonElement>(
+        "button[data-open-modal]",
+      )!;
       // eslint-disable-next-line
-      const closeBtn = this.querySelector<HTMLButtonElement>("button[data-close-modal]")!;
+      const closeBtn = this.querySelector<HTMLButtonElement>(
+        "button[data-close-modal]",
+      )!;
       // eslint-disable-next-line
       const dialog = this.querySelector("dialog")!;
       // eslint-disable-next-line
@@ -50,7 +58,11 @@ import SearchBar from "astro-pagefind/components/Search";
 
       const onWindowClick = (event: MouseEvent) => {
         // make sure the click is outside the of the dialog
-        if (document.body.contains(event.target as Node) && !dialogFrame.contains(event.target as Node)) closeModal();
+        if (
+          document.body.contains(event.target as Node) &&
+          !dialogFrame.contains(event.target as Node)
+        )
+          closeModal();
       };
       const handleEscKey = (e: KeyboardEvent) => {
         if (e.key === "Escape" && dialog.open) {
@@ -67,7 +79,10 @@ import SearchBar from "astro-pagefind/components/Search";
         animate(
           "dialog",
           {
-            clipPath: ["polygon(0 0, 100% 0, 100% -200%, -200% -200%)", "polygon(0 0, 100% 0, 100% 100%, 0% 100%)"],
+            clipPath: [
+              "polygon(0 0, 100% 0, 100% -200%, -200% -200%)",
+              "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+            ],
             opacity: [0, 1],
           },
           { duration: DIALOG_ANIMATION_DURATOIN_SECOND },
@@ -86,13 +101,19 @@ import SearchBar from "astro-pagefind/components/Search";
         animate(
           "dialog",
           {
-            clipPath: ["polygon(0 0, 100% 0, 100% 100%, 0% 100%)", "polygon(0 0, 100% 0, 100% -200%, -200% -200%)"],
+            clipPath: [
+              "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+              "polygon(0 0, 100% 0, 100% -200%, -200% -200%)",
+            ],
             opacity: [1, 0],
           },
           { duration: DIALOG_ANIMATION_DURATOIN_SECOND },
         );
 
-        setTimeout(() => dialog.close(), (DIALOG_ANIMATION_DURATOIN_SECOND / 2) * 1000);
+        setTimeout(
+          () => dialog.close(),
+          (DIALOG_ANIMATION_DURATOIN_SECOND / 2) * 1000,
+        );
 
         document.body.classList.remove("overflow-hidden");
         window.removeEventListener("click", onWindowClick);

@@ -1,7 +1,9 @@
 import { getCollection } from "astro:content";
 
 export const getCategories = async () => {
-  return (await getCollection("category")).map((category) => category.data.name);
+  return (await getCollection("category")).map(
+    (category) => category.data.name,
+  );
 };
 
 export const getPosts = async (max?: number) => {
@@ -21,11 +23,15 @@ export const getPostByTag = async (tag: string) => {
   return posts
     .filter((post) => !post.data.draft)
     .filter((post) => {
-      return post.data.tags.some((postTag) => postTag.toLowerCase() === lowercaseTag);
+      return post.data.tags.some(
+        (postTag) => postTag.toLowerCase() === lowercaseTag,
+      );
     });
 };
 
 export const filterPostsByCategory = async (category: string) => {
   const posts = await getPosts();
-  return posts.filter((post) => !post.data.draft).filter((post) => post.data.category.toLowerCase() === category);
+  return posts
+    .filter((post) => !post.data.draft)
+    .filter((post) => post.data.category.toLowerCase() === category);
 };

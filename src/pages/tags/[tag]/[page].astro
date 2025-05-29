@@ -1,0 +1,19 @@
+---
+import ListPosts from "@/components/ListPosts";
+import TitlePage from "@/components/TitlePage";
+import BaseLayout from "@/layouts/BaseLayout";
+import { getPostByTag } from "@/utils";
+
+const { tag } = Astro.params;
+
+if (!tag) {
+  return Astro.redirect("/404");
+}
+
+const posts = await getPostByTag(tag);
+---
+
+<BaseLayout title={tag}>
+  <TitlePage title={tag} />
+  <ListPosts posts={posts} />
+</BaseLayout>

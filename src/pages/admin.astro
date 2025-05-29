@@ -9,9 +9,17 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="noindex" name="robots" />
     <link href="/admin/config.yml" rel="cms-config-url" type="text/yaml" />
+    <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+    <script
+      src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+      type="text/javascript"></script>
     <title>Content Manager</title>
   </head>
   <body>
+    <!-- Add a simpler button:
+    Simple button that will open the modal.
+  -->
+    <div data-netlify-identity-button>Login with Netlify Identity</div>
     <script>
       import CMS from "decap-cms-app";
       import cloudinary from "decap-cms-media-library-cloudinary";

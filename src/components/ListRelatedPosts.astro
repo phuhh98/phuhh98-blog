@@ -27,9 +27,16 @@ const { posts } = Astro.props;
                 width={100}
               />
             </div>
-            <header class={cn("flex flex-col justify-center items-start gap-0 min-w-[50%]")}>
+            <header
+              class={cn(
+                "flex flex-col justify-center items-start gap-0 min-w-[50%]",
+              )}
+            >
               <div>
-                <a class="font-medium hover:underline" href={`/post/${post.slug}/`}>
+                <a
+                  class="font-medium hover:underline"
+                  href={`/post/${post.slug}/`}
+                >
                   {post.data.title}
                 </a>
               </div>
@@ -37,7 +44,8 @@ const { posts } = Astro.props;
               <div class="flex flex-wrap">
                 {post.data.tags.map((tag) => (
                   <span class="text-xxs text-gray-600 hover:underline">
-                    <a href={`/tags/${encodeURIComponent(tag)}`}>#{tag}</a>&nbsp;
+                    <a href={`/tags/${encodeURIComponent(tag)}`}>#{tag}</a>
+                    &nbsp;
                   </span>
                 ))}
               </div>

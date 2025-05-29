@@ -1,42 +1,47 @@
 ---
 import ListCategories from "@/components/ListCategories";
 import ListPosts from "@/components/ListPosts";
-import Pagination from "@/components/Pagination";
+import PageChangeButtons from "@/components/PageChangeButtons";
 import TitlePage from "@/components/TitlePage";
 import { siteConfig } from "@/data/site.config";
 import BaseLayout from "@/layouts/BaseLayout";
-import { getCategories, getPosts, sluglify, unsluglify } from "@/utils";
+import { getPosts, unsluglify } from "@/utils";
 
-// eslint-disable-next-line
-export async function getStaticPaths({ paginate }: any) {
-  const categories = await getCategories();
-  const allPosts = await getPosts();
+const { category, page } = Astro.params;
+const pageNumber = parseInt(page as string) ?? 1;
 
-  return categories.flatMap((category: string) => {
-    // eslint-disable-next-line
-    const unsluglifyNameCategory = unsluglify(category!.toLowerCase());
-    const filteredPosts = allPosts.filter((post) => post.data.category.toLowerCase() === unsluglifyNameCategory);
+const unsluglifyNameCategory = category
+  ? unsluglify(category.toLowerCase())
+  : "";
 
-    return paginate(filteredPosts, {
-      pageSize: siteConfig.paginationSize,
-      params: {
-        category: sluglify(category.toLowerCase()),
-      },
-    });
-  });
-}
-const params = Astro.params;
-const { page } = Astro.props;
-// eslint-disable-next-line
-const unsluglifyNameCategory = unsluglify(params.category!.toLowerCase());
-const posts = page.data;
+const allPosts = await getPosts();
+const filteredPosts = allPosts.filter(
+  (post) => post.data.category.toLowerCase() === unsluglifyNameCategory,
+);
+
+const maxPageNumber = Math.ceil(
+  filteredPosts.length / siteConfig.paginationSize,
+);
+
+const pagedPosts = filteredPosts.slice(
+  (pageNumber - 1) * siteConfig.paginationSize,
+  pageNumber * siteConfig.paginationSize,
+);
+
+const posts = pagedPosts;
 ---
 
-<BaseLayout title={params.category}>
+<BaseLayout title={category}>
   <TitlePage title={unsluglifyNameCategory} />
-  <ListCategories activeCategory={params.category} />
+  <ListCategories activeCategory={category} />
   <div class="flex-grow">
+    <PageChangeButtons
+      maxPageNumber={maxPageNumber}
+      pagedRouteComposer={(page: number) => `/category/${category}/${page}`}
+      pageGroupName="category"
+      pageNumber={pageNumber}
+    />
+
     <ListPosts posts={posts} />
   </div>
-  <Pagination page={page} />
 </BaseLayout>

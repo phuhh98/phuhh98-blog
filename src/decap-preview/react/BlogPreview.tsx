@@ -9,7 +9,9 @@ import Tag from "src/components/react/Tag";
 /**
  *  Refer to schema in src/content/config.ts>blog
  */
-export const BlogPreview: React.ComponentType<PreviewTemplateComponentProps> = ({ entry /*, ...otherprops */ }) => {
+export const BlogPreview: React.ComponentType<
+  PreviewTemplateComponentProps
+> = ({ entry /*, ...otherprops */ }) => {
   const title = entry.getIn(entryDataPath`title`) as string;
   const pubDate = entry.getIn(entryDataPath`pubDate`) as string;
   const description = entry.getIn(entryDataPath`description`) as string;
@@ -27,18 +29,29 @@ export const BlogPreview: React.ComponentType<PreviewTemplateComponentProps> = (
             year: "numeric",
           })}
         </time>
-        <h1 className="text-center text-4xl md:text-6xl md:pb-2.5 font-semibold">{title}</h1>
+        <h1 className="text-center text-4xl md:text-6xl md:pb-2.5 font-semibold">
+          {title}
+        </h1>
         <div className="m-auto flex flex-row gap-2 my-4 justify-center">
           {tags.map((tag) => (
             <Tag key={tag} tag={tag} />
           ))}
         </div>
         <div className="flex justify-center">
-          <img alt={"heroImage"} className="md:w-600 md:h-300" height={300} src={heroImage} width={600} />
+          <img
+            alt={"heroImage"}
+            className="md:w-600 md:h-300"
+            height={300}
+            src={heroImage}
+            width={600}
+          />
         </div>
       </section>
 
-      <section className="mx-auto my-4 prose prose-lg md:prose-xl" title="description">
+      <section
+        className="mx-auto my-4 prose prose-lg md:prose-xl"
+        title="description"
+      >
         <hr />
         <div className="flex flex-row gap-4 items-center">
           <aside className="font-bold">Description</aside>
@@ -47,7 +60,10 @@ export const BlogPreview: React.ComponentType<PreviewTemplateComponentProps> = (
         </div>
         <hr />
       </section>
-      <section className="mx-auto text-left prose prose-lg md:prose-xl" title="body">
+      <section
+        className="mx-auto text-left prose prose-lg md:prose-xl"
+        title="body"
+      >
         <Markdown
           components={{
             code(props) {

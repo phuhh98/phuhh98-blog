@@ -1,0 +1,52 @@
+---
+import ArrowRight from "@/components/icons/ArrowRight";
+import { twMerge } from "tailwind-merge";
+
+type Props = {
+  maxPageNumber: number;
+  pagedRouteComposer: (page: number) => string;
+  pageGroupName: string;
+  pageNumber: number;
+};
+
+const { maxPageNumber, pagedRouteComposer, pageGroupName, pageNumber } =
+  Astro.props;
+
+const previousPageNumber = pageNumber - 1;
+const nextPageNumber = pageNumber + 1;
+
+const nextPageDisabled = nextPageNumber > maxPageNumber;
+const previousPageDisabled = previousPageNumber < 1;
+
+const disabledClass = "cursor-not-allowed opacity-50";
+---
+
+<div class="flex flex-row justify-end gap-6 items-center mb-6">
+  <a
+    aria-label={`go to ${pageGroupName} page ${pageNumber + 1}`}
+    class={twMerge(
+      "flex justify-center items-center dark:text-white rounded-full hover:-translate-x-1 transition-transform duration-150 ease-in-out font-semibold gap-1 group",
+      previousPageDisabled ? disabledClass : "",
+    )}
+    href={pagedRouteComposer(previousPageNumber)}
+    ><span
+      class="mt-[1px] group-hover:scale-125 rotate-180 transition-transform duration-250 ease-in-out"
+    >
+      <ArrowRight height="18" width="18" /></span
+    >
+    Previous Page
+  </a>
+  <a
+    aria-label={`go to ${pageGroupName} page ${nextPageNumber}`}
+    class={twMerge(
+      "flex justify-center items-center dark:text-white rounded-full hover:translate-x-1 transition-transform duration-150 ease-in-out font-semibold gap-1 group",
+      nextPageDisabled ? disabledClass : "",
+    )}
+    href={pagedRouteComposer(nextPageNumber)}
+  >
+    Next Page <span
+      class="mt-[1px] group-hover:scale-125 transition-transform duration-250 ease-in-out"
+      ><ArrowRight height="18" width="18" /></span
+    >
+  </a>
+</div>

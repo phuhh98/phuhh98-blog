@@ -10,22 +10,22 @@ backend:
 # backend:
 #   name: proxy
 #   proxy_url: http://localhost:8081/api/v1
-#   branch: master # optional, defaults to master
+#   branch: main # optional, defaults to master
 #   squash_merges: true
 # local_backend: true # to work with local git, comment this before push
 # # end local dev block
 
 publish_mode: editorial_workflow # https://decapcms.org/docs/editorial-workflows/
-# media_folder: "src/assets/images" # Location where files will be stored in the repo
-# public_folder: "src/assets/images" # The src attribute for uploaded media
+media_folder: "src/assets/images" # Location where files will be stored in the repo
+public_folder: "src/assets/images" # The src attribute for uploaded media
 
-# Ref https://decapcms.org/docs/cloudinary/
-media_library:
-  name: cloudinary
-  output_filename_only: false
-  config:
-    cloud_name: dchinnmfc
-    api_key: 693835254646836
+# # Ref https://decapcms.org/docs/cloudinary/
+# media_library:
+#   name: cloudinary
+#   output_filename_only: false
+#   config:
+#     cloud_name: dchinnmfc
+#     api_key: 693835254646836
 
 collections:
   - name: "blog" # Used in routes, e.g., /admin/collections/blog

@@ -6,6 +6,8 @@ interface Props {
 const { firstLetterUppercase = true } = Astro.props;
 ---
 
-<h1 class={`text-5xl font-bold ${firstLetterUppercase ? "first-letter:uppercase" : ""}`}>
+<h1
+  class={`text-5xl font-bold ${firstLetterUppercase ? "first-letter:uppercase" : ""}`}
+>
   <slot />
 </h1>

@@ -12,7 +12,11 @@ import SunIcon from "@/components/icons/SunIcon";
     {
       display: ["none", "block", "none"],
       opacity: [0, 10, 0],
-      transform: ["rotate(0deg) scale(1)", "rotate(720deg) scale(200)", "rotate(360deg) scale(600)"],
+      transform: [
+        "rotate(0deg) scale(1)",
+        "rotate(720deg) scale(200)",
+        "rotate(360deg) scale(600)",
+      ],
     },
     { autoplay: false, duration: ICON_ANIMATION_DURATION_SECOND * 3 },
   );
@@ -22,7 +26,11 @@ import SunIcon from "@/components/icons/SunIcon";
     {
       display: ["none", "block", "none"],
       opacity: [0, 10, 0],
-      transform: ["rotate(360deg) scale(700)", "rotate(720deg) scale(400)", "rotate(0deg) scale(1)"],
+      transform: [
+        "rotate(360deg) scale(700)",
+        "rotate(720deg) scale(400)",
+        "rotate(0deg) scale(1)",
+      ],
     },
     { autoplay: false, duration: ICON_ANIMATION_DURATION_SECOND * 2 },
   );
@@ -35,7 +43,8 @@ import SunIcon from "@/components/icons/SunIcon";
       if (button) {
         button.addEventListener("click", (e) => {
           if (e.currentTarget instanceof HTMLButtonElement) {
-            const isPressed = e.currentTarget.getAttribute("aria-pressed") === "true";
+            const isPressed =
+              e.currentTarget.getAttribute("aria-pressed") === "true";
             const themeChangeEvent = new CustomEvent("theme-change", {
               detail: {
                 theme: isPressed ? "light" : "dark",
@@ -77,17 +86,32 @@ import SunIcon from "@/components/icons/SunIcon";
 
 <theme-toggle class="relative h-6 w-6">
   <button aria-label="Toggle Theme" class="group" id="toggle-theme">
-    <span class="absolute left-0 right-0 top-0 opacity-0 group-aria-pressed:opacity-100">
+    <span
+      class="absolute left-0 right-0 top-0 opacity-0 group-aria-pressed:opacity-100"
+    >
       <SunIcon size={24} />
     </span>
 
-    <span class="absolute left-0 right-0 top-0 opacity-0 group-aria-[pressed=false]:opacity-100" id="moon-icon">
+    <span
+      class="absolute left-0 right-0 top-0 opacity-0 group-aria-[pressed=false]:opacity-100"
+      id="moon-icon"
+    >
       <MoonIcon />
     </span>
   </button>
 </theme-toggle>
-<SunIcon class="absolute right-9 md:right-0 top-5 opacity-0 hidden" id="sun-expand" size={24} z={-100} />
-<SunIcon class="absolute right-9 md:right-0 top-5 opacity-0 hidden" id="sun-collapse" size={24} z={-100} />
+<SunIcon
+  class="absolute right-9 md:right-0 top-5 opacity-0 hidden"
+  id="sun-expand"
+  size={24}
+  z={-100}
+/>
+<SunIcon
+  class="absolute right-9 md:right-0 top-5 opacity-0 hidden"
+  id="sun-collapse"
+  size={24}
+  z={-100}
+/>
 
 <script is:inline>
   const button = document.getElementById("toggle-theme");

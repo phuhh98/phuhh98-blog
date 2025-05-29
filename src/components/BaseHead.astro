@@ -12,7 +12,12 @@ export interface Props {
   title: string;
 }
 
-const { articleDate, description = siteConfig.description, ogImage, title } = Astro.props;
+const {
+  articleDate,
+  description = siteConfig.description,
+  ogImage,
+  title,
+} = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // const socialImageURL = new URL(ogImage, Astro.url).href;
 // The input image is already an url
@@ -69,7 +74,12 @@ import { join } from "path";
 <meta content={socialImageURL} property="twitter:image" />
 
 <!-- RSS auto-discovery -->
-<link href="/rss.xml" rel="alternate" title={siteConfig.title} type="application/rss+xml" />
+<link
+  href="/rss.xml"
+  rel="alternate"
+  title={siteConfig.title}
+  type="application/rss+xml"
+/>
 
 <AstroFont
   config={[
@@ -80,7 +90,12 @@ import { join } from "path";
       preload: false,
       src: [
         {
-          path: join(process.cwd(), "public", "fonts", "Manrope-ExtraLight.woff2"),
+          path: join(
+            process.cwd(),
+            "public",
+            "fonts",
+            "Manrope-ExtraLight.woff2",
+          ),
           style: "normal",
           weight: "200",
         },
@@ -100,7 +115,12 @@ import { join } from "path";
           weight: "500",
         },
         {
-          path: join(process.cwd(), "public", "fonts", "Manrope-SemiBold.woff2"),
+          path: join(
+            process.cwd(),
+            "public",
+            "fonts",
+            "Manrope-SemiBold.woff2",
+          ),
           style: "normal",
           weight: "600",
         },
@@ -111,7 +131,12 @@ import { join } from "path";
           weight: "700",
         },
         {
-          path: join(process.cwd(), "public", "fonts", "Manrope-ExtraBold.woff2"),
+          path: join(
+            process.cwd(),
+            "public",
+            "fonts",
+            "Manrope-ExtraBold.woff2",
+          ),
           style: "normal",
           weight: "800",
         },

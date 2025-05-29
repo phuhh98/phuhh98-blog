@@ -20,7 +20,12 @@ const { cardImage, description, heroImage, pubDate, tags, title } = data;
 const articleDate = pubDate.toISOString();
 ---
 
-<BaseLayout articleDate={articleDate} description={description} image={cardImage} title={title}>
+<BaseLayout
+  articleDate={articleDate}
+  description={description}
+  image={cardImage}
+  title={title}
+>
   <article class="min-w-full md:py-4 sm:max-w-none md:max-w-none">
     <header class="mb-3 flex flex-col justify-center items-center gap-6">
       <div class="flex flex-col gap-2">
@@ -37,7 +42,9 @@ const articleDate = pubDate.toISOString();
         </h1>
       </div>
 
-      <div class="flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5">
+      <div
+        class="flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5"
+      >
         {tags.map((tag) => <Tag tag={tag} />)}
       </div>
     </header>
@@ -73,7 +80,11 @@ const articleDate = pubDate.toISOString();
       entries: IntersectionObserverEntry[],
       // observer: IntersectionObserver
     ) => {
-      const normalPageIndexStateLight = ["text-stone-400", "hover:text-stone-900", "hover:font-bold"];
+      const normalPageIndexStateLight = [
+        "text-stone-400",
+        "hover:text-stone-900",
+        "hover:font-bold",
+      ];
       const activePageIndexStyleLight = [
         "font-bold",
         "text-stone-900",
@@ -83,7 +94,11 @@ const articleDate = pubDate.toISOString();
         "shadow-[3px_1px_0px_1px_rgba(251,146,60,0.6)]",
       ];
 
-      const normalPageIndexStateDark = ["dark:text-stone-300", "dark:hover:text-stone-100", "dark:hover:font-bold"];
+      const normalPageIndexStateDark = [
+        "dark:text-stone-300",
+        "dark:hover:text-stone-100",
+        "dark:hover:font-bold",
+      ];
 
       const activePageIndexStyleDark = [
         "font-bold",
@@ -95,23 +110,36 @@ const articleDate = pubDate.toISOString();
       ];
 
       entries.forEach((entry) => {
-        const index = document.querySelector(`aside a[href="#${entry.target.id}"]`);
+        const index = document.querySelector(
+          `aside a[href="#${entry.target.id}"]`,
+        );
 
-        index?.classList.add(...normalPageIndexStateLight, ...normalPageIndexStateDark);
+        index?.classList.add(
+          ...normalPageIndexStateLight,
+          ...normalPageIndexStateDark,
+        );
 
         if (entry.isIntersecting) {
           activeTracker.add(entry.target);
         }
 
         if (!entry.isIntersecting) {
-          index?.classList.remove(...activePageIndexStyleLight, ...activePageIndexStyleDark);
+          index?.classList.remove(
+            ...activePageIndexStyleLight,
+            ...activePageIndexStyleDark,
+          );
           activeTracker.delete(entry.target);
         }
 
-        const activeIndex = document.querySelector(`aside a[href="#${Array.from(activeTracker)[0]?.id}"]`);
+        const activeIndex = document.querySelector(
+          `aside a[href="#${Array.from(activeTracker)[0]?.id}"]`,
+        );
 
         activeIndex?.classList.remove("text-stone-400", "dark:text-stone-300");
-        activeIndex?.classList.add(...activePageIndexStyleLight, ...activePageIndexStyleDark);
+        activeIndex?.classList.add(
+          ...activePageIndexStyleLight,
+          ...activePageIndexStyleDark,
+        );
       });
     };
 
