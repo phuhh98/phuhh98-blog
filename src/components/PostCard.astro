@@ -6,7 +6,10 @@ interface Props {
   data: {
     category: string;
     description: string;
-    heroImage: string;
+    heroImage: Extract<
+      Parameters<typeof Image>[0]["src"],
+      { orientation?: number }
+    >;
     pubDate: Date;
     title: string;
   };
