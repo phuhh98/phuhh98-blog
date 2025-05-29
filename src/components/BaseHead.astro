@@ -3,7 +3,7 @@ import { siteConfig } from "@/site-config";
 
 import "../styles/global.css";
 
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 export interface Props {
   articleDate?: string | undefined;
@@ -43,8 +43,8 @@ import { join } from "path";
 <!-- Primary Meta Tags -->
 <title>{siteTitle}</title>
 
-<!-- ViewTransitions  -->
-<ViewTransitions />
+<!-- ClientRouter  -->
+<ClientRouter />
 
 <!-- SEO -->
 <meta content={siteTitle} name="title" />
