@@ -9,7 +9,7 @@ type Props = {
 const { title, titleFirstLetterUppercase = true } = Astro.props;
 ---
 
-<div class="flex justify-start items-center gap-2 title">
+<div class="flex justify-start items-center gap-2 title select-none">
   <Shape />
   <Title firstLetterUppercase={titleFirstLetterUppercase}>{title}</Title>
 </div>

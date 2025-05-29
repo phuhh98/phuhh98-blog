@@ -21,14 +21,14 @@ const previousPageDisabled = previousPageNumber < 1;
 const disabledClass = "cursor-not-allowed opacity-50";
 ---
 
-<div class="flex flex-row justify-end gap-6 items-center mb-6">
+<div class="flex flex-row justify-end gap-6 items-center mb-6 select-none">
   <a
     aria-label={`go to ${pageGroupName} page ${pageNumber + 1}`}
     class={twMerge(
       "flex justify-center items-center dark:text-white rounded-full hover:-translate-x-1 transition-transform duration-150 ease-in-out font-semibold gap-1 group",
       previousPageDisabled ? disabledClass : "",
     )}
-    href={pagedRouteComposer(previousPageNumber)}
+    href={previousPageDisabled ? "#" : pagedRouteComposer(previousPageNumber)}
     ><span
       class="mt-[1px] group-hover:scale-125 rotate-180 transition-transform duration-250 ease-in-out"
     >
@@ -42,7 +42,7 @@ const disabledClass = "cursor-not-allowed opacity-50";
       "flex justify-center items-center dark:text-white rounded-full hover:translate-x-1 transition-transform duration-150 ease-in-out font-semibold gap-1 group",
       nextPageDisabled ? disabledClass : "",
     )}
-    href={pagedRouteComposer(nextPageNumber)}
+    href={nextPageDisabled ? "#" : pagedRouteComposer(nextPageNumber)}
   >
     Next Page <span
       class="mt-[1px] group-hover:scale-125 transition-transform duration-250 ease-in-out"

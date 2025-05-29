@@ -1,19 +1,37 @@
 ---
 import ListPosts from "@/components/ListPosts";
+import PageChangeButtons from "@/components/PageChangeButtons";
 import TitlePage from "@/components/TitlePage";
+import { siteConfig } from "@/data/site.config";
 import BaseLayout from "@/layouts/BaseLayout";
 import { getPostByTag } from "@/utils";
 
-const { tag } = Astro.params;
+const { page, tag } = Astro.params;
 
 if (!tag) {
   return Astro.redirect("/404");
 }
 
 const posts = await getPostByTag(tag);
+
+const pageNumber = parseInt(page as string) ?? 1;
+
+const maxPageNumber = Math.ceil(posts.length / siteConfig.paginationSize);
+
+const pagedPosts = posts.slice(
+  (pageNumber - 1) * siteConfig.paginationSize,
+  pageNumber * siteConfig.paginationSize,
+);
 ---
 
 <BaseLayout title={tag}>
   <TitlePage title={tag} />
-  <ListPosts posts={posts} />
+
+  <PageChangeButtons
+    maxPageNumber={maxPageNumber}
+    pagedRouteComposer={(page: number) => `/tags/${tag}/${page}`}
+    pageGroupName="category"
+    pageNumber={pageNumber}
+  />
+  <ListPosts posts={pagedPosts} />
 </BaseLayout>
