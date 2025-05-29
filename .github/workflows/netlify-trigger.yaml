@@ -35,6 +35,7 @@ jobs:
   trigger-webhook:
     needs: build
     runs-on: ubuntu-latest
+    environment: deployment
     steps:
       - name: Call webhook
         run: curl -X POST ${{ vars.NETLIFY_WEBHOOK_URL }}
