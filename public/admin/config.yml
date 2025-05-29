@@ -3,29 +3,20 @@ backend:
   name: github
   repo: phuhh98/phuhh98.github.io
   branch: main
-  base_url: https://netlify-cms-github-oauth-provider-o2ex.onrender.com
+  base_url: https://api.netlify.com
   squash_merges: true
+# End go live block
 
-# # config for local development, comment this before push to github
+# # Config for local development, comment this before push to github
 # backend:
-#   name: proxy
-#   proxy_url: http://localhost:8081/api/v1
+#   name: git-gateway
 #   branch: main # optional, defaults to master
-#   squash_merges: true
 # local_backend: true # to work with local git, comment this before push
 # # end local dev block
 
 publish_mode: editorial_workflow # https://decapcms.org/docs/editorial-workflows/
 media_folder: "src/assets/images" # Location where files will be stored in the repo
 public_folder: "src/assets/images" # The src attribute for uploaded media
-
-# # Ref https://decapcms.org/docs/cloudinary/
-# media_library:
-#   name: cloudinary
-#   output_filename_only: false
-#   config:
-#     cloud_name: dchinnmfc
-#     api_key: 693835254646836
 
 collections:
   - name: "blog" # Used in routes, e.g., /admin/collections/blog
