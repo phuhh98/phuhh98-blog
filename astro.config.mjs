@@ -14,11 +14,17 @@ import { remarkReadingTime } from "./src/utils/readTime.ts";
 export default defineConfig({
   adapter: netlify({
     edgeMiddleware: true,
-    image: {
-      domains: ["res.cloudinary.com"],
-    },
   }),
   base: "",
+  image: {
+    domains: ["res.cloudinary.com"],
+    remotePatterns: [
+      {
+        hostname: "res.cloudinary.com",
+        protocol: "https",
+      },
+    ],
+  },
   integrations: [
     // mdx config inherit markdown config and apply only differences
     mdx({
