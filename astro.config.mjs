@@ -4,8 +4,6 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import playformCompress from "@playform/compress";
-import sentry from "@sentry/astro";
-import spotlightjs from "@spotlightjs/astro";
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
@@ -31,8 +29,6 @@ export default defineConfig({
       syntaxHighlight: "prism",
     }),
     sitemap(),
-    sentry(),
-    spotlightjs(),
     react({
       include: ["**/react/.(jsx|tsx)$/"],
     }),
