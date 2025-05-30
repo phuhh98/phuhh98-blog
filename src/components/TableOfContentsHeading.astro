@@ -2,16 +2,16 @@
 import { cn } from "@utils";
 const { heading } = Astro.props;
 
+export interface Props {
+  heading: Heading;
+}
+
 type Heading = {
   depth: number;
   slug: string;
   subheadings: Heading[];
   text: string;
 };
-
-export interface Props {
-  heading: Heading;
-}
 ---
 
 <li class="flex flex-col">

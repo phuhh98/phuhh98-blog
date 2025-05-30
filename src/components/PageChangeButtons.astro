@@ -1,6 +1,7 @@
 ---
 import ArrowRight from "@components/icons/ArrowRight.astro";
-import { twMerge } from "tailwind-merge";
+import PaginateActivePage from "@components/PaginateActivePage.svelte";
+import { cn } from "@utils";
 
 type Props = {
   maxPageNumber: number;
@@ -18,29 +19,45 @@ const nextPageNumber = pageNumber + 1;
 const nextPageDisabled = nextPageNumber > maxPageNumber;
 const previousPageDisabled = previousPageNumber < 1;
 
-const disabledClass = "cursor-not-allowed opacity-50";
+const linkDisabledClass = "cursor-not-allowed opacity-50";
+const linkPrevActiveInteractiveClass =
+  "hover:-translate-x-1 transition-transform duration-150 ease-in-out";
+const linkNextActiveInteractiveClass =
+  "hover:translate-x-1 transition-transform duration-150 ease-in-out";
 ---
 
 <div class="flex flex-row justify-end gap-6 items-center mb-6 select-none">
   <a
+    aria-disabled={previousPageDisabled ? "true" : "false"}
     aria-label={`go to ${pageGroupName} page ${pageNumber + 1}`}
-    class={twMerge(
-      "flex justify-center items-center dark:text-white rounded-full hover:-translate-x-1 transition-transform duration-150 ease-in-out font-semibold gap-1 group",
-      previousPageDisabled ? disabledClass : "",
+    class={cn(
+      "flex justify-center items-center dark:text-white rounded-full font-semibold gap-1 group",
+      previousPageDisabled ? linkDisabledClass : linkPrevActiveInteractiveClass,
     )}
     href={previousPageDisabled ? "#" : pagedRouteComposer(previousPageNumber)}
     ><span
-      class="mt-[1px] group-hover:scale-125 rotate-180 transition-transform duration-250 ease-in-out"
+      class={cn(
+        "mt-[1px] rotate-180",
+        !previousPageDisabled
+          ? "group-hover:scale-125 transition-transform duration-250 ease-in-out"
+          : "",
+      )}
     >
       <ArrowRight height="18" width="18" /></span
     >
     Previous Page
   </a>
+  <PaginateActivePage
+    currentPage={pageNumber}
+    maxPage={maxPageNumber}
+    pagedRouteComposer={pagedRouteComposer}
+  />
   <a
+    aria-disabled={nextPageDisabled ? "true" : "false"}
     aria-label={`go to ${pageGroupName} page ${nextPageNumber}`}
-    class={twMerge(
-      "flex justify-center items-center dark:text-white rounded-full hover:translate-x-1 transition-transform duration-150 ease-in-out font-semibold gap-1 group",
-      nextPageDisabled ? disabledClass : "",
+    class={cn(
+      "flex justify-center items-center dark:text-white rounded-full font-semibold gap-1 group",
+      nextPageDisabled ? linkDisabledClass : linkNextActiveInteractiveClass,
     )}
     href={nextPageDisabled ? "#" : pagedRouteComposer(nextPageNumber)}
   >

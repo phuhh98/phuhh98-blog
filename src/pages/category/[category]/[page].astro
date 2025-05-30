@@ -3,8 +3,8 @@ import ListCategories from "@components/ListCategories.astro";
 import ListPosts from "@components/ListPosts.astro";
 import PageChangeButtons from "@components/PageChangeButtons.astro";
 import TitlePage from "@components/TitlePage.astro";
-import { siteConfig } from "@data/site.config";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { siteConfig } from "@site-config";
 import { getPosts, unsluglify } from "@utils";
 
 const { category, page } = Astro.params;
