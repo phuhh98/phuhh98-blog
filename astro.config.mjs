@@ -9,7 +9,6 @@ import yaml from "@rollup/plugin-yaml";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
 import { defineConfig } from "astro/config";
-import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 import { remarkReadingTime } from "./src/utils/readTime.ts";
 
@@ -61,6 +60,6 @@ export default defineConfig({
     define: {
       global: "window", // Fix for `global` not defined in some packages
     },
-    plugins: [yaml(), nodePolyfills()],
+    plugins: [yaml()],
   },
 });
