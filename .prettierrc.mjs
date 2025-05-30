@@ -6,7 +6,7 @@
  */
 const config = {
   endOfLine: "crlf",
-  plugins: ["prettier-plugin-astro"],
+  plugins: ["prettier-plugin-astro", "prettier-plugin-svelte"],
   printWidth: 80,
 };
 

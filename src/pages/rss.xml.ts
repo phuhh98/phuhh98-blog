@@ -1,5 +1,5 @@
-import { siteConfig } from "@/site-config";
 import rss from "@astrojs/rss";
+import { siteConfig } from "@site-config";
 import { getCollection } from "astro:content";
 // eslint-disable-next-line
 export async function GET(context: any) {

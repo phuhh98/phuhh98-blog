@@ -5,9 +5,9 @@ import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
 import tailwind from "@astrojs/tailwind";
 import playformCompress from "@playform/compress";
-import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
+import { defineConfig } from "astro/config";
 
 import { remarkReadingTime } from "./src/utils/readTime.ts";
 

@@ -1,21 +1,27 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "target": "ESNext",
     "strictNullChecks": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "baseUrl": ".",
     "verbatimModuleSyntax": true,
+    "isolatedModules": true,
     "paths": {
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
       "@utils": ["src/utils/index.ts"],
       "@utils/": ["src/utils/*"],
-      "@data/*": ["src/data/*"],
       "@site-config": ["src/data/site.config.ts"],
       "@styles/*": ["src/styles/*"],
       "@graphql": ["src/codegen/graphql/type.graphql.ts"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ]
   },
   "exclude": ["./dist"]
 }

@@ -1,3 +1,7 @@
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 interface ImportMetaEnv {
@@ -8,10 +12,6 @@ interface ImportMetaEnv {
   readonly PUBLIC_LINKEDIN_PROFILE_URL: string;
   readonly PUBLIC_X_PROFILE_URL: string;
   // more env variables...
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
 }
 
 interface Window {
