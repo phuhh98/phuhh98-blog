@@ -12,20 +12,49 @@
     <title>Content Manager</title>
   </head>
   <body>
-    <!-- Dashboard script-->
-    <script is:inline src="https://unpkg.com/decap-cms@^3.4.0/dist/decap-cms.js"
-    ></script>
-    <!-- <script>
+    <!-- <script is:inline src="https://unpkg.com/decap-cms@^3.4.0/dist/decap-cms.js"
+    ></script> -->
+    <script>
       import CMS from "decap-cms-app";
-      import { BlogPreview } from "src/decap-preview/react/BlogPreview";
+      import { parseDocument } from "yaml";
 
-      // Initialize the CMS object
-      CMS.init();
-      // TODO: Reference to custom edit UI https://decapcms.org/docs/customization/
-      // Now the registry is available via the CMS object.
-      // CMS.registerPreviewTemplate("my-template", MyTemplate);
-      CMS.registerPreviewStyle("src/styles/global.css");
-      CMS.registerPreviewTemplate("blog", BlogPreview);
-    </script> -->
+      type CMSConfig = Exclude<
+        Parameters<typeof CMS.init>[0],
+        undefined
+      >["config"];
+
+      const config = await fetch("/admin/config.yml")
+        .then((response) => response.text())
+        .then((text) => {
+          const parsedConfig = parseDocument(text).toJSON() as CMSConfig;
+
+          const mappedConfig: CMSConfig = {
+            ...parsedConfig,
+            ...(import.meta.env.DEV
+              ? {
+                  ...((parsedConfig as any).env.dev as CMSConfig["backend"]),
+                }
+              : {
+                  ...((parsedConfig as any).env.prod as CMSConfig["backend"]),
+                }),
+          };
+
+          return mappedConfig;
+        });
+
+      CMS.init({
+        config: {
+          ...config,
+          load_config_file: false,
+        },
+      });
+      // CMS.registerRemarkPlugin()
+
+      // // TODO: Reference to custom edit UI https://decapcms.org/docs/customization/
+      // // Now the registry is available via the CMS object.
+      // // CMS.registerPreviewTemplate("my-template", MyTemplate);
+      // CMS.registerPreviewStyle("src/styles/global.css");
+      // CMS.registerPreviewTemplate("blog", BlogPreview);
+    </script>
   </body>
 </html>
