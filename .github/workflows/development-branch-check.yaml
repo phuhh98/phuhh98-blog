@@ -4,6 +4,9 @@ on:
   pull_request:
     types:
       - opened
+  push:
+    branches-ignore:
+      - main
   workflow_dispatch:
   # Allows external webhook trigger
 
