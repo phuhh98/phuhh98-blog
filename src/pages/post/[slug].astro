@@ -1,12 +1,12 @@
 ---
-import Giscus from "@/components/Giscus";
-import ListRelatedPosts from "@/components/ListRelatedPosts";
-import Code from "@/components/mdx/Code";
-import ImageMdx from "@/components/mdx/ImageMdx";
-import SButton from "@/components/mdx/SButton";
-import Share from "@/components/Share";
-import TableOfContents from "@/components/TableOfContents";
-import BlogPost from "@/layouts/BlogPost";
+import Giscus from "@components/Giscus.astro";
+import ListRelatedPosts from "@components/ListRelatedPosts.astro";
+import Code from "@components/mdx/Code.astro";
+import ImageMdx from "@components/mdx/ImageMdx.astro";
+import SButton from "@components/mdx/SButton.astro";
+import Share from "@components/Share.astro";
+import TableOfContents from "@components/TableOfContents.astro";
+import BlogPost from "@layouts/BlogPost.astro";
 import { type CollectionEntry, getCollection, getEntry } from "astro:content";
 
 const { slug } = Astro.params;

@@ -1,10 +1,10 @@
 ---
-import ListPosts from "@/components/ListPosts";
-import PageChangeButtons from "@/components/PageChangeButtons";
-import TitlePage from "@/components/TitlePage";
-import { siteConfig } from "@/data/site.config";
-import BaseLayout from "@/layouts/BaseLayout";
-import { getPostByTag } from "@/utils";
+import ListPosts from "@components/ListPosts.astro";
+import PageChangeButtons from "@components/PageChangeButtons.astro";
+import TitlePage from "@components/TitlePage.astro";
+import { siteConfig } from "@data/site.config";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getPostByTag } from "@utils";
 
 const { page, tag } = Astro.params;
 

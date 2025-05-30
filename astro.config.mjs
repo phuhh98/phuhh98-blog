@@ -2,6 +2,7 @@ import mdx from "@astrojs/mdx";
 import netlify from "@astrojs/netlify";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
+import svelte from "@astrojs/svelte";
 import tailwind from "@astrojs/tailwind";
 import playformCompress from "@playform/compress";
 import { defineConfig } from "astro/config";
@@ -42,6 +43,7 @@ export default defineConfig({
     icon(),
     pagefind(),
     playformCompress(),
+    svelte(),
   ],
 
   // Markdown reference https://docs.astro.build/en/reference/configuration-reference/#markdown-options
