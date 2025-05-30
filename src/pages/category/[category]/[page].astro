@@ -1,11 +1,11 @@
 ---
-import ListCategories from "@/components/ListCategories";
-import ListPosts from "@/components/ListPosts";
-import PageChangeButtons from "@/components/PageChangeButtons";
-import TitlePage from "@/components/TitlePage";
-import { siteConfig } from "@/data/site.config";
-import BaseLayout from "@/layouts/BaseLayout";
-import { getPosts, unsluglify } from "@/utils";
+import ListCategories from "@components/ListCategories.astro";
+import ListPosts from "@components/ListPosts.astro";
+import PageChangeButtons from "@components/PageChangeButtons.astro";
+import TitlePage from "@components/TitlePage.astro";
+import { siteConfig } from "@data/site.config";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getPosts, unsluglify } from "@utils";
 
 const { category, page } = Astro.params;
 const pageNumber = parseInt(page as string) ?? 1;

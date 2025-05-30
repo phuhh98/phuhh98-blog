@@ -1,8 +1,7 @@
 ---
-import { siteConfig } from "@/data/site.config";
-
-import LinkedinIcon from "./icons/linkedinIcon.astro";
-import XIcon from "./icons/XIcon.astro";
+import LinkedinIcon from "@components/icons/linkedinIcon.astro";
+import XIcon from "@components/icons/XIcon.astro";
+import { siteConfig } from "@data/site.config";
 const message = siteConfig.shareMessage;
 
 const URL = Astro.url.href;

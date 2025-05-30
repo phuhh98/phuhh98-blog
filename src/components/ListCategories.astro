@@ -1,6 +1,6 @@
 ---
-import Category from "@/components/Category";
-import { getCategories } from "@/utils";
+import Category from "@components/Category.astro";
+import { getCategories } from "@utils";
 const categories = await getCategories();
 
 const { activeCategory } = Astro.props;
