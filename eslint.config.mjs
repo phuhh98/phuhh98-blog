@@ -58,6 +58,7 @@ export default tseslint.config(
   {
     rules: {
       "@typescript-eslint/ban-ts-comment": ["off"],
+      "@typescript-eslint/no-explicit-any": ["warn"],
       "@typescript-eslint/triple-slash-reference": ["off"],
       "no-console": ["error"],
     },

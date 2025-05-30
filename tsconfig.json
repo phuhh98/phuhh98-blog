@@ -15,7 +15,8 @@
       "@utils/": ["src/utils/*"],
       "@site-config": ["src/data/site.config.ts"],
       "@styles/*": ["src/styles/*"],
-      "@graphql": ["src/codegen/graphql/type.graphql.ts"]
+      "@graphql": ["src/codegen/graphql/type.graphql.ts"],
+      "@public/*": ["public/*"]
     },
     "plugins": [
       {

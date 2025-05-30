@@ -1,20 +1,18 @@
-# Go live, uncomment this before push to github
-# Start Go live block
-backend:
-  name: github
-  repo: phuhh98/phuhh98.github.io
-  branch: main
-  base_url: https://api.netlify.com
-  squash_merges: true
-# End Go live block
+# env key is parsed an unwrappped in src/pages/admin.astro page
+env:
+  prod:
+    backend:
+      name: github
+      repo: phuhh98/phuhh98.github.io
+      branch: main
+      base_url: https://api.netlify.com
+      squash_merges: true
 
-# # Config for local development, comment this before push to github
-# # Start Local dev block
-# backend:
-#   name: git-gateway
-#   branch: main # optional, defaults to master
-# local_backend: true # to work with local git, comment this before push
-# # End local dev block
+  dev:
+    backend:
+      name: git-gateway
+      branch: main # optional, defaults to master
+    local_backend: true # to work with local git, comment this before push
 
 publish_mode: editorial_workflow # https://decapcms.org/docs/editorial-workflows/
 media_folder: "src/assets/images" # Location where files will be stored in the repo
