@@ -9,6 +9,7 @@ import yaml from "@rollup/plugin-yaml";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
 import { defineConfig } from "astro/config";
+import { analyzer } from "vite-bundle-analyzer";
 
 import { remarkReadingTime } from "./src/utils/readTime.ts";
 
@@ -60,6 +61,12 @@ export default defineConfig({
     define: {
       global: "window", // Fix for `global` not defined in some packages
     },
-    plugins: [yaml()],
+    plugins: [
+      yaml(),
+      Boolean(process.env.ANALYZE_BUNDLE) &&
+        analyzer({
+          openAnalyzer: true,
+        }),
+    ],
   },
 });
