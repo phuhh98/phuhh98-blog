@@ -7,7 +7,6 @@ interface ImportMeta {
 interface ImportMetaEnv {
   readonly PUBLIC_APP_BASE_URL: sttring;
   readonly PUBLIC_AUTHOR_EMAIL: string;
-  readonly PUBLIC_CLOUDINARY_NAME: string;
   readonly PUBLIC_GITHUB_PROFILE_URL: string;
   readonly PUBLIC_LINKEDIN_PROFILE_URL: string;
   readonly PUBLIC_X_PROFILE_URL: string;
