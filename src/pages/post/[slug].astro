@@ -2,6 +2,7 @@
 import Giscus from "@components/Giscus.astro";
 import ListRelatedPosts from "@components/ListRelatedPosts.astro";
 import Code from "@components/mdx/Code.astro";
+import Iframe from "@components/mdx/Iframe.astro";
 import ImageMdx from "@components/mdx/ImageMdx.astro";
 import SButton from "@components/mdx/SButton.astro";
 import Share from "@components/Share.astro";
@@ -56,7 +57,7 @@ const { Content, headings, remarkPluginFrontmatter } = await post.render();
         class="prose prose-lg md:prose-xl dark:prose-invert mb-12 min-w-full"
       >
         <Content
-          components={{ img: ImageMdx, pre: Code, SButton }}
+          components={{ Iframe: Iframe, img: ImageMdx, pre: Code, SButton }}
           data-pagefind-body
         />
       </div>

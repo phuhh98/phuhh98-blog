@@ -1,0 +1,17 @@
+---
+/**
+ * A simple Astro component to render an iframe with default styles.
+ * Using by adding `Iframe` component in MDX files.
+ */
+// eslint-disable-next-line no-undef
+type Props = astroHTML.JSX.IframeHTMLAttributes;
+
+const props = Astro.props;
+---
+
+<iframe
+  {...props}
+  class="w-full h-[15rem] md:h-[30rem] not-prose"
+  src={props.src}
+  title={props.title}></iframe>
+

@@ -1,21 +1,25 @@
 ---
 import { Image } from "astro:assets";
-
-type Props = HTMLImageElement;
+// eslint-disable-next-line no-undef
+type Props = astroHTML.JSX.ImgHTMLAttributes;
 
 const props = Astro.props;
 ---
 
-<div class="flex flex-col justify-center items-center w-full not-prose">
-  <Image
-    alt={props.alt}
-    class={"mb-2"}
-    decoding={"async"}
-    height={props.height ?? 400}
-    loading={"lazy"}
-    src={props.src}
-    width={props.width ?? 400}
-  />
+{
+  props.src && (
+    <div class="flex flex-col justify-center items-center w-full not-prose">
+      <Image
+        alt={props.alt ?? ""}
+        class={"mb-2"}
+        decoding={"async"}
+        height={props.height as number}
+        loading={"lazy"}
+        src={props.src}
+        width={props.width as number}
+      />
 
-  <span class="mt-0 font-bold">{props.title}</span>
-</div>
+      <p class="mt-0 font-bold text-center">{props.title}</p>
+    </div>
+  )
+}
