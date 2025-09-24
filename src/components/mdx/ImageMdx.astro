@@ -6,11 +6,16 @@ type Props = HTMLImageElement;
 const props = Astro.props;
 ---
 
-<div class="flex flex-row justify-center">
+<div class="flex flex-col justify-center items-center w-full not-prose">
   <Image
     alt={props.alt}
+    class={"mb-2"}
+    decoding={"async"}
     height={props.height ?? 400}
+    loading={"lazy"}
     src={props.src}
     width={props.width ?? 400}
   />
+
+  <span class="mt-0 font-bold">{props.title}</span>
 </div>
