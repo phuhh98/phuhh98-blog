@@ -14,3 +14,8 @@ strapi
 **/*.jpeg
 **/*.svg
 **/*.txt
+
+*.mdx
+*.md
+package.json
+package-lock.json

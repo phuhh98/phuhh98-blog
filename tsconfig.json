@@ -16,7 +16,8 @@
       "@site-config": ["src/data/site.config.ts"],
       "@styles/*": ["src/styles/*"],
       "@graphql": ["src/codegen/graphql/type.graphql.ts"],
-      "@public/*": ["public/*"]
+      "@public/*": ["public/*"],
+      "@decap/*": ["src/decap-cms/*"]
     },
     "plugins": [
       {
